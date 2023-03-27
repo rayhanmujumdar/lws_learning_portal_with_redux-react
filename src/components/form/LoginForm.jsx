@@ -1,16 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../feature/auth/authApi";
+import { useCheckRole } from "../../hooks/useCheckRole";
 import validateEmail from "../../utils/validEmail";
+import Error from "../ui/Error";
 
 export default function LoginForm() {
+  const isAdmin = useCheckRole("admin")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, { isSuccess, isError, isLoading, error }] = useLoginMutation();
+  const navigate = useNavigate();
+  const [logInError, setLogInError] = useState(null);
+  const {accessToken} = useSelector((state) => state?.auth) || {};
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validateEmail(email)){
-      
+    if (validateEmail(email)) {
+      login({
+        email,
+        password,
+      });
+    } else {
+      setLogInError("Email is not valid");
     }
   };
+  useEffect(() => {
+    if (isSuccess || accessToken) {
+      navigate(isAdmin ? "/admin/dashboard" : "/student/course-player");
+    } else if (isError) {
+      setLogInError(error?.data);
+    }
+  }, [isSuccess, isError, accessToken]);
   return (
     <form
       onSubmit={handleSubmit}
@@ -67,12 +88,14 @@ export default function LoginForm() {
 
       <div>
         <button
+          disabled={isLoading}
           type="submit"
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
         >
           Sign in
         </button>
       </div>
+      {logInError && <Error message={logInError}></Error>}
     </form>
   );
 }

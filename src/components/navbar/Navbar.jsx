@@ -1,25 +1,45 @@
 import React from "react";
 import navLogoImage from "../../assets/image/learningportal.svg";
-import {Link} from "react-router-dom"
 import CustomLink from "../ui/CustomLink";
+import { useDispatch, useSelector } from "react-redux";
+import { loggedOut } from "../../feature/auth/authSlice";
+import { useCheckRole } from "../../hooks/useCheckRole";
+import { selectAuthUser } from "../../feature/auth/authSelector";
 
 export default function Navbar() {
+  const {name} = useSelector(selectAuthUser) || {}
+  const isAdmin = useCheckRole("admin");
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(loggedOut());
+    localStorage.clear();
+  };
   return (
     <nav className="shadow-md">
       <div className="max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3">
         {/* <Link to="/"> */}
-          <img className="h-10" src={navLogoImage} />
+        <img className="h-10" src={navLogoImage} />
         {/* </Link> */}
         <div>
           <ul className="flex gap-x-4 justify-center items-center">
-            <li className=""><CustomLink to="/student/course-player">Course</CustomLink></li>
-            <li><CustomLink to="/student/leaderboard">Leaderboard</CustomLink></li>
-            <li><CustomLink to="/admin/dashboard">Dashboard</CustomLink></li>
+            {!isAdmin && 
+              <>
+                <li>
+                  <CustomLink to="/student/course-player">Course</CustomLink>
+                </li>
+                <li>
+                  <CustomLink to="/student/leaderboard">Leaderboard</CustomLink>
+                </li>
+              </>
+            }
           </ul>
         </div>
         <div className="flex items-center gap-3">
-          <h2 className="font-medium">Saad Hasan</h2>
-          <button className="flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium">
+          <h2 className="font-medium">{name}</h2>
+          <button
+            onClick={handleLogout}
+            className="flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

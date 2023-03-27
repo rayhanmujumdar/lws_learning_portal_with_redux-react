@@ -52,7 +52,16 @@
     {
       "email": "rayhanmujumdar@gmail.com",
       "password": "$2a$10$le2NL.OUwCILqBej0irFZeyauLkhphbctODXyruuPXWjc/IDMeTdO",
+      "name": "Rayhan M",
+      "role": "student",
       "id": 8
+    },
+    {
+      "email": "rayhanmujumdar0177@gmail.com",
+      "password": "$2a$10$V.QR27Ps8sXGg87Y0iFB2OAmhmguTv0R0CvqUaCiVeMtCmQRdT4fS",
+      "namne": "Rayhan",
+      "role": "admin",
+      "id": 9
     }
   ],
   "videos": [
