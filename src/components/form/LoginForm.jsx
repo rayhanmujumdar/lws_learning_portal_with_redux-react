@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../feature/auth/authApi";
+import { selectAuth } from "../../feature/auth/authSelector";
 import { useCheckRole } from "../../hooks/useCheckRole";
 import validateEmail from "../../utils/validEmail";
 import Error from "../ui/Error";
 
 export default function LoginForm() {
+  const location = useLocation()
   const isAdmin = useCheckRole("admin")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, { isSuccess, isError, isLoading, error }] = useLoginMutation();
   const navigate = useNavigate();
   const [logInError, setLogInError] = useState(null);
-  const {accessToken} = useSelector((state) => state?.auth) || {};
+  const {accessToken} = useSelector(selectAuth) || {};
+  const from = location?.state?.from?.pathname || (isAdmin ? "/admin/dashboard" : "/student/course-player")
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
@@ -27,7 +30,7 @@ export default function LoginForm() {
   };
   useEffect(() => {
     if (isSuccess || accessToken) {
-      navigate(isAdmin ? "/admin/dashboard" : "/student/course-player");
+      navigate(from,{replace: true});
     } else if (isError) {
       setLogInError(error?.data);
     }

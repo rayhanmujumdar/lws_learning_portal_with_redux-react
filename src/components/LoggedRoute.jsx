@@ -1,11 +1,12 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export default function LoggedRoute({ children }) {
   const isLogged = useAuth();
+  const location = useLocation()
   if(!isLogged){
-    return <Navigate to="/" replace={true}></Navigate>
+    return <Navigate to="/" replace state={{from: location}}></Navigate>
   }
   return children;
 }
