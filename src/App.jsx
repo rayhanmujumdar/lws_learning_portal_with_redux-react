@@ -12,6 +12,7 @@ import Quizzes from './pages/adminPage/Quizzes'
 import AssignmentMark from "./pages/adminPage/AssignmentMark"
 import Navbar from "./components/navbar/Navbar"
 import {useMatchPathName} from "./utils/useMatchPathName"
+import NotFound from "./components/notFound/NotFound"
 
 function App() {
   const match = useMatchPathName(["/student/register",'/',"/admin/login"])
@@ -29,6 +30,7 @@ function App() {
       <Route path='/admin/dashboard/assignment' element={<Assignment></Assignment>}></Route>
       <Route path='/admin/dashboard/quizzes' element={<Quizzes></Quizzes>}></Route>
       <Route path='/admin/dashboard/assignment-mark' element={<AssignmentMark></AssignmentMark>}></Route>
+      <Route path='*' element={<NotFound></NotFound>}></Route>
     </Routes>
   </>
 }

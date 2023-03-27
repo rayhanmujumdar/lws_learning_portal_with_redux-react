@@ -48,6 +48,11 @@
       "role": "student",
       "name": "Arif",
       "id": 7
+    },
+    {
+      "email": "rayhanmujumdar@gmail.com",
+      "password": "$2a$10$le2NL.OUwCILqBej0irFZeyauLkhphbctODXyruuPXWjc/IDMeTdO",
+      "id": 8
     }
   ],
   "videos": [

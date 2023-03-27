@@ -1,9 +1,23 @@
-import React from "react";
-import {Link} from "react-router-dom"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import validateEmail from "../../utils/validEmail";
 
 export default function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(validateEmail(email)){
+      
+    }
+  };
   return (
-    <form className="mt-8 space-y-6" action="#" method="POST">
+    <form
+      onSubmit={handleSubmit}
+      className="mt-8 space-y-6"
+      action="#"
+      method="POST"
+    >
       <input type="hidden" name="remember" value="true" />
       <div className="rounded-md shadow-sm -space-y-px">
         <div>
@@ -11,6 +25,8 @@ export default function LoginForm() {
             Email address
           </label>
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             id="email-address"
             name="email"
             type="email"
@@ -25,6 +41,8 @@ export default function LoginForm() {
             Password
           </label>
           <input
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             id="password"
             name="password"
             type="password"

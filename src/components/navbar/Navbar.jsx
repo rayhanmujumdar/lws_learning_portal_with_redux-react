@@ -1,5 +1,7 @@
 import React from "react";
 import navLogoImage from "../../assets/image/learningportal.svg";
+import {Link} from "react-router-dom"
+import CustomLink from "../ui/CustomLink";
 
 export default function Navbar() {
   return (
@@ -8,6 +10,13 @@ export default function Navbar() {
         {/* <Link to="/"> */}
           <img className="h-10" src={navLogoImage} />
         {/* </Link> */}
+        <div>
+          <ul className="flex gap-x-4 justify-center items-center">
+            <li className=""><CustomLink to="/student/course-player">Course</CustomLink></li>
+            <li><CustomLink to="/student/leaderboard">Leaderboard</CustomLink></li>
+            <li><CustomLink to="/admin/dashboard">Dashboard</CustomLink></li>
+          </ul>
+        </div>
         <div className="flex items-center gap-3">
           <h2 className="font-medium">Saad Hasan</h2>
           <button className="flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium">
