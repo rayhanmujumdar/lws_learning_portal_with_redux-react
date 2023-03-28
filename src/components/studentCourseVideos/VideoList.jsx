@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Video from "./Video";
 import {useGetVideosQuery} from "../../feature/videos/videosApi"
 import Error from "../ui/error/Error"
 import Loading from "../ui/loader/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function VideoList() {
   const {data : videos,isLoading,isError} = useGetVideosQuery()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if(videos?.length > 0){
+      navigate(`/student/course-player/${videos[0].id}`)
+    }
+  },[])
   let content = null
   if(isLoading){
     content = <Loading></Loading>

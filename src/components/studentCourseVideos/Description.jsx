@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Loading from "../ui/loader/Loading";
 import Error from "../ui/error/Error";
 import { format } from "date-fns";
+import Player from "./Player";
 
 export default function Description() {
   const { videoId } = useParams();
@@ -22,16 +23,7 @@ export default function Description() {
     const dateFormat = format(new Date(date), "d MMMM yyyy");
     content = (
       <div className="col-span-full w-full space-y-8 lg:col-span-2">
-        <iframe
-          width="100%"
-          className="aspect-video"
-          src={url}
-          title="Things I wish I knew as a Junior Web Developer - Sumit Saha - BASIS SoftExpo 2023"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-
+        <Player url={url}></Player>
         <div>
           <h1 className="text-lg font-semibold tracking-tight text-slate-100">
             {title}

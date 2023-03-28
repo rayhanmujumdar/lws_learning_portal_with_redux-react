@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
+import React from "react";
+import { Link,useParams } from "react-router-dom";
 export default function Video({ video }) {
   const { id, title, views, duration } = video;
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/student/course-player/1");
-  }, []);
+  const {videoId} = useParams()
   return (
-    <div className="w-full flex flex-row gap-2 cursor-pointer hover:bg-slate-900 p-2 py-3">
+    <div className={`w-full flex flex-row gap-2 cursor-pointer hover:bg-slate-900 p-2 py-3 ${videoId == id && "bg-slate-900"}`}>
       {/* <!-- Thumbnail --> */}
       <svg
         fill="none"

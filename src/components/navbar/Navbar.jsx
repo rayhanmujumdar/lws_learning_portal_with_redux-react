@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { loggedOut } from "../../feature/auth/authSlice";
 import { useCheckRole } from "../../hooks/useCheckRole";
 import { selectAuthUser } from "../../feature/auth/authSelector";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 
 export default function Navbar() {
   const { name } = useSelector(selectAuthUser) || {};
   const isAdmin = useCheckRole("admin");
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(loggedOut());
     localStorage.clear();
+    dispatch(loggedOut())
   };
   return (
     <nav className="shadow-md">
@@ -26,7 +26,7 @@ export default function Navbar() {
             {!isAdmin && (
               <>
                 <li>
-                  <CustomLink to="/student/course-player">Course</CustomLink>
+                  <CustomLink to={'/student/course-player'}>Course</CustomLink>
                 </li>
                 <li>
                   <CustomLink to="/student/leaderboard">Leaderboard</CustomLink>
