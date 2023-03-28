@@ -17,6 +17,7 @@ import useAuthCheck from "./hooks/useAuthCheck";
 import LoggedRoute from "./components/LoggedRoute";
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import StudentRoute from "./components/studentRoute/StudentRoute";
+import Description from "./components/studentCourseVideos/Description";
 
 function App() {
   const match = useMatchPathName(["/student/register", "/", "/admin/login"]);
@@ -44,7 +45,12 @@ function App() {
                 </StudentRoute>
               </LoggedRoute>
             }
-          ></Route>
+          >
+            <Route
+              path="/student/course-player/:videoId"
+              element={<Description></Description>}
+            ></Route>
+          </Route>
           <Route
             path="/student/quiz"
             element={

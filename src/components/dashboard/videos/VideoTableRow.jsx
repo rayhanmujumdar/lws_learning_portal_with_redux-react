@@ -1,16 +1,16 @@
 import React from "react";
+import { useDeleteVideoMutation } from "../../../feature/videos/videosApi";
 
-export default function VideoTableRow() {
+export default function VideoTableRow({ video, handleEdit }) {
+  const { id, title, description } = video;
+  const [deleteVideo] = useDeleteVideoMutation();
   return (
     <tr>
-      <td className="table-td">
-        #16 Extend Theme - Advanced Concepts | Tailwind CSS Bangla Tutorial
-      </td>
-      <td className="table-td">
-        In this 16th video of Learn with Sumit Tailwind..
-      </td>
+      <td className="table-td">{title}</td>
+      <td className="table-td">{description.slice(0, 60)} ...</td>
       <td className="table-td flex gap-x-2">
         <svg
+          onClick={() => deleteVideo(id)}
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
@@ -24,6 +24,7 @@ export default function VideoTableRow() {
           />
         </svg>
         <svg
+          onClick={() => handleEdit(id)}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

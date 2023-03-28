@@ -4,5 +4,5 @@ import { useCheckRole } from "../../hooks/useCheckRole";
 export default function AdminRoute({ children }) {
   const isRole = useCheckRole("admin");
   if (isRole) return children;
-  return <Navigate to='/not-found' replace={true}></Navigate>
+  return <Navigate to="/not-found" replace></Navigate>;
 }
