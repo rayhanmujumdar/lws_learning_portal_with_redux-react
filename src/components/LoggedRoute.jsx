@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import {useCheckRole} from "../hooks/useCheckRole"
 
 export default function LoggedRoute({ children }) {
   const isLogged = useAuth();

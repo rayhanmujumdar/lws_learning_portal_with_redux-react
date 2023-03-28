@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { useRegisterMutation } from "../../feature/auth/authApi";
 import { useNavigate } from "react-router-dom";
-import Error from "../ui/Error";
+import Error from "../ui/error/Error";
 import { selectAuth } from "../../feature/auth/authSelector";
 import { useSelector } from "react-redux";
 

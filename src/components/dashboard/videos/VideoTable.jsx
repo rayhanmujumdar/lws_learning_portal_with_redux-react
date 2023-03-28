@@ -1,10 +1,10 @@
 import React from "react";
 import { useGetVideosQuery } from "../../../feature/videos/videosApi";
-import TableError from "../../ui/TableError";
-import TableLoading from "../../ui/TableLoading";
+import TableError from "../../ui/error/TableError";
+import TableLoading from "../../ui/loader/TableLoading";
 import VideoTableRow from "./VideoTableRow";
 
-export default function videoTable({handleEdit}) {
+export default function videoTable({handleEdit,handleDelete}) {
   const { data: videos, isLoading, isError } = useGetVideosQuery();
   let content = null;
   if (isLoading) {
@@ -18,7 +18,7 @@ export default function videoTable({handleEdit}) {
   }
   if (!isLoading && !isError && videos.length > 0) {
     content = videos.map((video) => (
-      <VideoTableRow key={video.id} video={video} handleEdit={handleEdit}></VideoTableRow>
+      <VideoTableRow key={video.id} video={video} handleDelete={handleDelete} handleEdit={handleEdit}></VideoTableRow>
     ));
   }
   return (

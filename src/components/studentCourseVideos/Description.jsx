@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useGetVideoQuery } from "../../feature/videos/videosApi";
 import { useParams } from "react-router-dom";
-import Loading from "../ui/Loading";
-import Error from "../ui/Error";
+import Loading from "../ui/loader/Loading";
+import Error from "../ui/error/Error";
 import { format } from "date-fns";
 
 export default function Description() {

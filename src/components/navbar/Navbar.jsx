@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { loggedOut } from "../../feature/auth/authSlice";
 import { useCheckRole } from "../../hooks/useCheckRole";
 import { selectAuthUser } from "../../feature/auth/authSelector";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const {name} = useSelector(selectAuthUser) || {}
+  const { name } = useSelector(selectAuthUser) || {};
   const isAdmin = useCheckRole("admin");
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -17,12 +18,12 @@ export default function Navbar() {
   return (
     <nav className="shadow-md">
       <div className="max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3">
-        {/* <Link to="/"> */}
-        <img className="h-10" src={navLogoImage} />
-        {/* </Link> */}
+        <Link to={isAdmin ? "/admin/dashboard" : "/student/course-player"}>
+          <img className="h-10" src={navLogoImage} />
+        </Link>
         <div>
           <ul className="flex gap-x-4 justify-center items-center">
-            {!isAdmin && 
+            {!isAdmin && (
               <>
                 <li>
                   <CustomLink to="/student/course-player">Course</CustomLink>
@@ -31,7 +32,7 @@ export default function Navbar() {
                   <CustomLink to="/student/leaderboard">Leaderboard</CustomLink>
                 </li>
               </>
-            }
+            )}
           </ul>
         </div>
         <div className="flex items-center gap-3">

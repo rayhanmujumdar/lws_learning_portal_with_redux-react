@@ -5,10 +5,9 @@ import { useLoginMutation } from "../../feature/auth/authApi";
 import { selectAuth } from "../../feature/auth/authSelector";
 import { useCheckRole } from "../../hooks/useCheckRole";
 import validateEmail from "../../utils/validEmail";
-import Error from "../ui/Error";
+import Error from "../ui/error/Error";
 
 export default function LoginForm() {
-  const location = useLocation();
   const isAdmin = useCheckRole("admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +15,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const [logInError, setLogInError] = useState(null);
   const { accessToken } = useSelector(selectAuth) || {};
-  const from = isAdmin ? "/admin/dashboard" : location?.state?.from?.pathname;
+  const from = isAdmin ? "/admin/dashboard" : "/student/course-player";
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {

@@ -1,16 +1,14 @@
 import React from "react";
-import { useDeleteVideoMutation } from "../../../feature/videos/videosApi";
 
-export default function VideoTableRow({ video, handleEdit }) {
+export default function VideoTableRow({ video, handleEdit,handleDelete }) {
   const { id, title, description } = video;
-  const [deleteVideo] = useDeleteVideoMutation();
   return (
     <tr>
       <td className="table-td">{title}</td>
       <td className="table-td">{description.slice(0, 60)} ...</td>
       <td className="table-td flex gap-x-2">
         <svg
-          onClick={() => deleteVideo(id)}
+          onClick={() => handleDelete(id)}
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
