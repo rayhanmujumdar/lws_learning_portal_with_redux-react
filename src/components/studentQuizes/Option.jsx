@@ -1,13 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-export default function Option() {
+
+export default function Option({ option, quizId, optionId,handleResult }) {
+  ;
   return (
-    <>
-      {/* <!-- Option 1 --> */}
-      <label htmlFor="option1_q2">
-        <input type="checkbox" id="option1_q2" />A search bar where the results
-        are displayed as you type.
-      </label>
-    </>
+    <label htmlFor={`option${optionId}_q${quizId}`}>
+      <input
+        onChange={(e) => handleResult(e,option)}
+        type="checkbox"
+        id={`option${optionId}_q${quizId}`}
+      />
+      {option?.option}
+    </label>
   );
 }

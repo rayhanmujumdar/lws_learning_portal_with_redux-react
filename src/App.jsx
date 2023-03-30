@@ -18,6 +18,7 @@ import LoggedRoute from "./components/LoggedRoute";
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import StudentRoute from "./components/studentRoute/StudentRoute";
 import Description from "./components/studentCourseVideos/Description";
+import defaultPlayerRouteId from "./utils/defaultPlayerRouteId";
 
 function App() {
   const match = useMatchPathName(["/student/register", "/", "/admin/login"]);
@@ -37,7 +38,7 @@ function App() {
             element={<Register></Register>}
           ></Route>
           <Route
-            path="/student/course-player"
+            path="/student/course-player/:videoId"
             element={
               <LoggedRoute>
                 <StudentRoute>
@@ -46,13 +47,10 @@ function App() {
               </LoggedRoute>
             }
           >
-            <Route
-              path="/student/course-player/:videoId"
-              element={<Description></Description>}
-            ></Route>
+            <Route index element={<Description></Description>}></Route>
           </Route>
           <Route
-            path="/student/quiz"
+            path="/student/quiz/:quizId"
             element={
               <LoggedRoute>
                 <StudentRoute>

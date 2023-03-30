@@ -5,20 +5,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { loggedOut } from "../../feature/auth/authSlice";
 import { useCheckRole } from "../../hooks/useCheckRole";
 import { selectAuthUser } from "../../feature/auth/authSelector";
-import { Link,useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 
 export default function Navbar() {
   const { name } = useSelector(selectAuthUser) || {};
+  const videoId = defaultPlayerRouteId();
+  console.log(videoId)
   const isAdmin = useCheckRole("admin");
   const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.clear();
-    dispatch(loggedOut())
+    dispatch(loggedOut());
   };
   return (
     <nav className="shadow-md">
       <div className="max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3">
-        <Link to={isAdmin ? "/admin/dashboard" : "/student/course-player"}>
+        <Link
+          to={
+            isAdmin ? "/admin/dashboard" : `/student/course-player/${videoId}`
+          }
+        >
           <img className="h-10" src={navLogoImage} />
         </Link>
         <div>
@@ -26,7 +33,9 @@ export default function Navbar() {
             {!isAdmin && (
               <>
                 <li>
-                  <CustomLink to={'/student/course-player'}>Course</CustomLink>
+                  <CustomLink to={`/student/course-player/${videoId}`}>
+                    Course
+                  </CustomLink>
                 </li>
                 <li>
                   <CustomLink to="/student/leaderboard">Leaderboard</CustomLink>

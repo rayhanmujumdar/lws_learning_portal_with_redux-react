@@ -3,6 +3,14 @@ export const videosApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVideos: builder.query({
       query: () => `/videos`,
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          if (data.length > 0) {
+            localStorage.setItem("videoId", JSON.stringify(data[0].id));
+          }
+        } catch (err) {}
+      },
     }),
     getVideo: builder.query({
       query: (id) => `/videos/${id}`,
@@ -22,7 +30,7 @@ export const videosApi = apiSlice.injectEndpoints({
             })
           );
         } catch (err) {}
-      }
+      },
     }),
     editVideo: builder.mutation({
       query: ({ id, data }) => ({
@@ -30,19 +38,19 @@ export const videosApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      async onQueryStarted({id,data}, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         const optimisticEdit = dispatch(
           apiSlice.util.updateQueryData("getVideos", undefined, (draft) => {
-            const videoIndex = draft.findIndex(video => video.id === id)
-            draft[videoIndex] = data
+            const videoIndex = draft.findIndex((video) => video.id === id);
+            draft[videoIndex] = data;
           })
         );
         try {
           await queryFulfilled;
         } catch (err) {
-          optimisticEdit.undo()
+          optimisticEdit.undo();
         }
-      }
+      },
     }),
     deleteVideo: builder.mutation({
       query: (id) => ({
@@ -52,16 +60,16 @@ export const videosApi = apiSlice.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         const optimisticDelete = dispatch(
           apiSlice.util.updateQueryData("getVideos", undefined, (draft) => {
-            const remainingVideo= draft.filter(video => video.id !== id)
-            return remainingVideo
+            const remainingVideo = draft.filter((video) => video.id !== id);
+            return remainingVideo;
           })
         );
         try {
           await queryFulfilled;
         } catch (err) {
-          optimisticDelete.undo()
+          optimisticDelete.undo();
         }
-      }
+      },
     }),
   }),
 });

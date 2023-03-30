@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGetVideoQuery } from "../../feature/videos/videosApi";
 import { useParams } from "react-router-dom";
@@ -6,11 +6,19 @@ import Loading from "../ui/loader/Loading";
 import Error from "../ui/error/Error";
 import { format } from "date-fns";
 import Player from "./Player";
+import { useGetRelatedQuizQuery } from "../../feature/quizzes/QuizApi";
+import { clearQuizState } from "../../feature/quizzes/quizSlice";
+import { useDispatch } from "react-redux";
 
 export default function Description() {
   const { videoId } = useParams();
+  const dispatch = useDispatch();
   const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
+  const { data: relatedQuiz } = useGetRelatedQuizQuery(videoId);
   const { title, description, url, createdAt } = video || {};
+  useEffect(() => {
+    dispatch(clearQuizState());
+  }, [dispatch]);
   let content = null;
   if (isLoading) {
     return <Loading></Loading>;
@@ -39,12 +47,20 @@ export default function Description() {
               এসাইনমেন্ট
             </Link>
 
-            <Link
-              to="/student/Quiz"
-              className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary"
-            >
-              কুইজে অংশগ্রহণ করুন
-            </Link>
+            {relatedQuiz?.length > 0 && !relatedQuiz[0].isSubmit ? (
+              <Link
+                to={`/student/Quiz/${videoId}`}
+                className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary"
+              >
+                কুইজে অংশগ্রহণ করুন
+              </Link>
+            ) : (
+              <p
+                className="px-3 font-bold py-1 border border-gray-500 text-gray-500 rounded-full text-sm "
+              >
+                কুইজ submitted
+              </p>
+            )}
           </div>
           <p className="mt-4 text-sm text-slate-400 leading-6">{description}</p>
         </div>

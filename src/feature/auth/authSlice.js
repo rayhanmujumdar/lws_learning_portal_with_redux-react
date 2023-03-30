@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   accessToken: undefined,
   user: undefined,
+  videoId: undefined,
 };
 export const authSlice = createSlice({
   name: "authSlice",
@@ -15,7 +16,10 @@ export const authSlice = createSlice({
       state.accessToken = undefined;
       state.user = undefined;
     },
+    setVideoId: (state, action) => {
+      state.videoId = action.payload;
+    },
   },
 });
-export default authSlice.reducer
-export const {loggedOut,loggedUser} = authSlice.actions
+export default authSlice.reducer;
+export const { loggedOut, loggedUser,setVideoId } = authSlice.actions;

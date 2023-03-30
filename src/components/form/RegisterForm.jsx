@@ -1,18 +1,20 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRegisterMutation } from "../../feature/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import Error from "../ui/error/Error";
 import { selectAuth } from "../../feature/auth/authSelector";
 import { useSelector } from "react-redux";
+import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 
 export default function RegisterForm() {
+  const videoId = defaultPlayerRouteId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [registerError, setRegisterError] = useState("");
-  const navigate = useNavigate()
-  const {accessToken} = useSelector(selectAuth) || {};
+  const navigate = useNavigate();
+  const { accessToken } = useSelector(selectAuth) || {};
   const [register, { isSuccess, isError, error, isLoading }] =
     useRegisterMutation();
   const handleSubmit = (e) => {
@@ -27,7 +29,7 @@ export default function RegisterForm() {
     }
   };
   useEffect(() => {
-    if (isSuccess || accessToken) navigate("/student/course-player")
+    if (isSuccess || accessToken) navigate(`/student/course-player/${videoId}`);
     else if (isError) setRegisterError(error?.data);
   }, [isSuccess, isError]);
   return (
