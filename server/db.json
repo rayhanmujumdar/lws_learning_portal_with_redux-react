@@ -141,8 +141,7 @@
           "option": "A function that is called after a certain time interval",
           "isCorrect": false
         }
-      ],
-      "isSubmit": true
+      ]
     },
     {
       "id": 2,
@@ -170,8 +169,7 @@
           "option": "All of the above.",
           "isCorrect": false
         }
-      ],
-      "isSubmit": true
+      ]
     },
     {
       "id": 3,
@@ -199,8 +197,7 @@
           "option": "No Difference",
           "isCorrect": false
         }
-      ],
-      "isSubmit": true
+      ]
     }
   ],
   "assignmentMark": [
@@ -253,30 +250,6 @@
       "totalWrong": 1,
       "totalMark": 10,
       "mark": 5
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "totalQuiz": 2,
-      "totalCorrect": 2,
-      "totalWrong": 0,
-      "totalMark": 10,
-      "mark": 10,
-      "id": 2
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalQuiz": 1,
-      "totalCorrect": 1,
-      "totalWrong": 0,
-      "totalMark": 5,
-      "mark": 5,
-      "id": 3
     }
   ]
 }

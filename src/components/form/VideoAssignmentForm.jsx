@@ -11,8 +11,8 @@ export default function VideoAssignmentForm({
   videoTitle,
 }) {
   const dispatch = useDispatch();
-  const { title, id: assignmentId } = assignment || {};
-  const { id: userId, name, totalMark } = useSelector(selectAuthUser);
+  const { title, id: assignmentId, totalMark } = assignment || {};
+  const { id: userId, name } = useSelector(selectAuthUser);
   const [repoLink, setRepoLink] = useState("");
   const [addAssignment, { isSuccess }] = useAddAssignmentMutation();
   useEffect(() => {
@@ -26,6 +26,7 @@ export default function VideoAssignmentForm({
           },
         })
       );
+      control(false);
     }
   }, [isSuccess]);
   const handleSubmit = (e) => {
