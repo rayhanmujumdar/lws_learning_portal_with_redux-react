@@ -9,7 +9,6 @@ import validateEmail from "../../utils/validEmail";
 import Error from "../ui/error/Error";
 
 export default function LoginForm() {
-  const videoId = defaultPlayerRouteId();
   const isAdmin = useCheckRole("admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,9 +16,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const [logInError, setLogInError] = useState(null);
   const { accessToken } = useSelector(selectAuth) || {};
-  const from = isAdmin
-    ? "/admin/dashboard"
-    : `/student/course-player/${videoId}`;
+  const from = isAdmin ? "/admin/dashboard" : `/student/course-player/1`;
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
@@ -33,18 +30,14 @@ export default function LoginForm() {
   };
   useEffect(() => {
     if (isSuccess || accessToken) {
+      console.log(from);
       navigate(from, { replace: true });
     } else if (isError) {
       setLogInError(error?.data);
     }
   }, [isSuccess, isError, accessToken]);
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mt-8 space-y-6"
-      action="#"
-      method="POST"
-    >
+    <form onSubmit={handleSubmit} className="mt-8 space-y-6">
       <input type="hidden" name="remember" value="true" />
       <div className="rounded-md shadow-sm -space-y-px">
         <div>

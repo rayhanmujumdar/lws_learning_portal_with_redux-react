@@ -12,6 +12,7 @@ const baseQuery = fetchBaseQuery({
 });
 export const apiSlice = createApi({
   reducerPath: "api",
+  keepUnusedDataFor: 600,
   baseQuery: async (args, api, extraOption) => {
     let result = await baseQuery(args, api, extraOption);
     if (result?.error && result?.error?.status === 401) {

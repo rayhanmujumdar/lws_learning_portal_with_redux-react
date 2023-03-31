@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetVideoQuery } from "../../feature/videos/videosApi";
 import { useParams } from "react-router-dom";
@@ -9,22 +9,40 @@ import Player from "./Player";
 import { useGetRelatedQuizQuery } from "../../feature/quizzes/QuizApi";
 import { clearQuizState } from "../../feature/quizzes/quizSlice";
 import { useDispatch } from "react-redux";
+import { useGetAssignmentQuery } from "../../feature/assignments/assignmentsApi";
+import Modal from "../Modal/Modal";
+import VideoAssignmentForm from "../form/VideoAssignmentForm";
 
 export default function Description() {
   const { videoId } = useParams();
   const dispatch = useDispatch();
+  const [modalOpen, setModalOpen] = useState();
   const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
   const { data: relatedQuiz } = useGetRelatedQuizQuery(videoId);
+  const { data: assignment, isSuccess: isSuccessAssignment } =
+    useGetAssignmentQuery(videoId);
   const { title, description, url, createdAt } = video || {};
   useEffect(() => {
     dispatch(clearQuizState());
   }, [dispatch]);
   let content = null;
+  let modal = null;
   if (isLoading) {
     return <Loading></Loading>;
   }
   if (!isLoading && isError) {
     return <Error message={"There was an error"}></Error>;
+  }
+  if (isSuccessAssignment) {
+    modal = (
+      <Modal open={modalOpen}>
+        <VideoAssignmentForm
+          control={setModalOpen}
+          assignment={assignment[0]}
+          videoTitle={video?.title}
+        ></VideoAssignmentForm>
+      </Modal>
+    );
   }
   if (!isLoading && !isError && video?.id) {
     const date = createdAt?.split("T")[0];
@@ -32,6 +50,7 @@ export default function Description() {
     content = (
       <div className="col-span-full w-full space-y-8 lg:col-span-2">
         <Player url={url}></Player>
+        {modal}
         <div>
           <h1 className="text-lg font-semibold tracking-tight text-slate-100">
             {title}
@@ -40,12 +59,18 @@ export default function Description() {
             Uploaded on {dateFormat}
           </h2>
           <div className="flex gap-4">
-            <Link
-              to="/student/assignment"
-              className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary"
-            >
-              এসাইনমেন্ট
-            </Link>
+            {assignment?.length > 0 && !assignment[0]?.isSubmit ? (
+              <button
+                onClick={() => setModalOpen(true)}
+                className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary"
+              >
+                এসাইনমেন্ট
+              </button>
+            ) : (
+              <p className="px-3 font-bold py-1 border border-gray-500 text-gray-500 rounded-full text-sm ">
+                এসাইনমেন্ট submitted
+              </p>
+            )}
 
             {relatedQuiz?.length > 0 && !relatedQuiz[0].isSubmit ? (
               <Link
@@ -55,9 +80,7 @@ export default function Description() {
                 কুইজে অংশগ্রহণ করুন
               </Link>
             ) : (
-              <p
-                className="px-3 font-bold py-1 border border-gray-500 text-gray-500 rounded-full text-sm "
-              >
+              <p className="px-3 font-bold py-1 border border-gray-500 text-gray-500 rounded-full text-sm ">
                 কুইজ submitted
               </p>
             )}
