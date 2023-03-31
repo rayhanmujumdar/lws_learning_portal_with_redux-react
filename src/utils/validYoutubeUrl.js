@@ -1,4 +1,4 @@
-const validateUrl = (url) => {
+const validYoutubeUrl = (url) => {
     return String(url)
       .toLowerCase()
       .match(
@@ -6,4 +6,4 @@ const validateUrl = (url) => {
       );
   };
   
-  export default validateUrl
+  export default validYoutubeUrl

@@ -21,7 +21,7 @@ export default function Description() {
   const { data: relatedQuiz } = useGetRelatedQuizQuery(videoId);
   const { data: assignment, isSuccess: isSuccessAssignment } =
     useGetAssignmentQuery(videoId);
-  const { title, description, url, createdAt } = video || {};
+  const { id,title, description, url, createdAt } = video || {};
   useEffect(() => {
     dispatch(clearQuizState());
   }, [dispatch]);
@@ -39,7 +39,8 @@ export default function Description() {
         <VideoAssignmentForm
           control={setModalOpen}
           assignment={assignment[0]}
-          videoTitle={video?.title}
+          videoTitle={title}
+          videoId={id}
         ></VideoAssignmentForm>
       </Modal>
     );

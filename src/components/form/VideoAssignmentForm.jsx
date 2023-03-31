@@ -4,26 +4,30 @@ import TextInput from "../ui/TextInput";
 import { selectAuthUser } from "../../feature/auth/authSelector";
 import { useAddAssignmentMutation } from "../../feature/assignmentMark/assignmentMarkSlice";
 import { assignmentApi } from "../../feature/assignments/assignmentsApi";
+import Error from "../ui/error/Error";
+import validUrl from "../../utils/validUrl";
 
 export default function VideoAssignmentForm({
   control,
   assignment,
   videoTitle,
+  videoId
 }) {
   const dispatch = useDispatch();
   const { title, id: assignmentId, totalMark } = assignment || {};
   const { id: userId, name } = useSelector(selectAuthUser);
   const [repoLink, setRepoLink] = useState("");
-  const [addAssignment, { isSuccess }] = useAddAssignmentMutation();
+  const [addAssignment, { isSuccess, isError }] = useAddAssignmentMutation();
   useEffect(() => {
     if (isSuccess) {
       dispatch(
         assignmentApi.endpoints.addSubmitted.initiate({
           id: assignmentId,
+          videoId,
           data: {
             ...assignment,
             isSubmit: true,
-          },
+          }
         })
       );
       control(false);
@@ -31,17 +35,18 @@ export default function VideoAssignmentForm({
   }, [isSuccess]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    addAssignment({
-      student_id: userId,
-      student_name: name,
-      assignment_id: assignmentId,
-      title,
-      createdAt: new Date().toISOString(),
-      totalMark,
-      mark: 0,
-      repo_link: repoLink,
-      status: "pending",
-    });
+    if (validUrl(repoLink))
+      addAssignment({
+        student_id: userId,
+        student_name: name,
+        assignment_id: assignmentId,
+        title,
+        createdAt: new Date().toISOString(),
+        totalMark,
+        mark: 0,
+        repo_link: repoLink,
+        status: "pending",
+      });
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
@@ -74,6 +79,7 @@ export default function VideoAssignmentForm({
           Submit
         </button>
       </div>
+      {isError && <Error message="There was an error"></Error>}
     </form>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
-import validateUrl from "../../utils/validateUrl";
+import validYoutubeUrl from "../../utils/validYoutubeUrl";
 
 export default function Player({ url }) {
-  const validUrl = validateUrl(url);
+  const validUrl = validYoutubeUrl(url);
   return (
     <iframe
       width="100%"

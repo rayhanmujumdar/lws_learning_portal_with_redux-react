@@ -10,6 +10,23 @@ export const assignmentApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      async onQueryStarted({ videoId }, { queryFulfilled, dispatch }) {
+        try {
+          await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData(
+              "getAssignment",
+              videoId.toString(),
+              (draft) => {
+                const index = draft.findIndex(
+                  (assignment) => assignment.video_id === videoId
+                );
+                draft[index].isSubmit = true;
+              }
+            )
+          );
+        } catch (err) {}
+      },
     }),
   }),
 });
