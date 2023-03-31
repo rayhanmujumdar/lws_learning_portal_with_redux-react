@@ -1,0 +1,1 @@
+export const selectLeaderBoard = (state) => state.leaderboard.leaderboard

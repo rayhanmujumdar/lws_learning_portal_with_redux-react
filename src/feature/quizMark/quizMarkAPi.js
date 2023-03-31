@@ -3,7 +3,7 @@ import { apiSlice } from "../api/apiSlice";
 export const quizMarkApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getQuizMark: builder.query({
-      query: () => `/quizMark`,
+      query: (id) => `/quizMark?student_id_like=${id}`,
     }),
     addQuizMark: builder.mutation({
       query: (data) => ({

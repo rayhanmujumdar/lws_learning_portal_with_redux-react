@@ -258,47 +258,11 @@
       "video_id": 2,
       "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "totalQuiz": 1,
-      "totalCorrect": 0,
-      "totalWrong": 1,
-      "totalMark": 0,
+      "totalCorrect": 1,
+      "totalWrong": 0,
+      "totalMark": 5,
       "mark": 5,
       "id": 2
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalQuiz": 1,
-      "totalCorrect": 1,
-      "totalWrong": 0,
-      "totalMark": 5,
-      "mark": 5,
-      "id": 3
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalQuiz": 1,
-      "totalCorrect": 1,
-      "totalWrong": 0,
-      "totalMark": 5,
-      "mark": 5,
-      "id": 4
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalQuiz": 1,
-      "totalCorrect": 1,
-      "totalWrong": 0,
-      "totalMark": 5,
-      "mark": 5,
-      "id": 5
     }
   ]
 }

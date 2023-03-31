@@ -9,7 +9,7 @@ const initialState = {
     totalCorrect: undefined,
     totalWrong: undefined,
     totalMark: undefined,
-    mark: 5,
+    mark: undefined,
   },
 };
 const searchId = (id, quiz) => {
@@ -60,7 +60,8 @@ const quizSlice = createSlice({
       state.quizMark.totalQuiz = totalQuiz;
       state.quizMark.totalCorrect = findCorrect;
       state.quizMark.totalWrong = totalQuiz - findCorrect;
-      state.quizMark.totalMark = findCorrect * state.quizMark.mark;
+      state.quizMark.totalMark = totalQuiz * state.quizMark.mark;
+      state.quizMark.mark = findCorrect * 5;
     },
     clearQuizState: (state) => {
       state.quizSelectedCount = 0;

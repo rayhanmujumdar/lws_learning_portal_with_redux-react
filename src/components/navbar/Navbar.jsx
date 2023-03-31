@@ -11,7 +11,6 @@ import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 export default function Navbar() {
   const { name } = useSelector(selectAuthUser) || {};
   const videoId = defaultPlayerRouteId();
-  console.log(videoId)
   const isAdmin = useCheckRole("admin");
   const dispatch = useDispatch();
   const handleLogout = () => {
