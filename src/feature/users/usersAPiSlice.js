@@ -1,20 +1,22 @@
 import { apiSlice } from "../../feature/api/apiSlice";
-import { assignmentMarkSlice } from "../assignmentMark/assignmentMarkSlice";
-import { addToLeaderboard } from "../leaderboard/leaderboardSlice";
+import { assignmentMarkApi } from "../assignmentMark/assignmentMarkSlice";
+import { addToLeaderboard, addMyRank } from "../leaderboard/leaderboardSlice";
 import { quizMarkApi } from "../quizMark/quizMarkAPi";
 export const usersSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => `/users`,
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled, getState }) {
+        const user = getState().auth.user;
         try {
           const { data: users } = await queryFulfilled;
+          const usersResult = [];
           for (const user of users) {
             const { data: quizMark } = await dispatch(
               quizMarkApi.endpoints.getQuizMark.initiate(user?.id)
             );
             const { data: assignmentMark } = await dispatch(
-              assignmentMarkSlice.endpoints.getAssignmentMark.initiate(user?.id)
+              assignmentMarkApi.endpoints.getAssignmentMark.initiate(user?.id)
             );
             let totalQuizMark = 0;
             let totalAssignmentMark = 0;
@@ -32,13 +34,20 @@ export const usersSlice = apiSlice.injectEndpoints({
             }
             const totalMark = totalAssignmentMark + totalQuizMark;
             const userResult = {
-              ...user,
+              id: user.id,
+              name: user.name,
               totalQuizMark,
               totalAssignmentMark,
               totalMark,
             };
-            dispatch(addToLeaderboard(userResult));
+            usersResult.push(userResult);
           }
+          dispatch(
+            addToLeaderboard(
+              usersResult.sort((a, b) => b.totalMark - a.totalMark)
+            )
+          );
+          dispatch(addMyRank(user?.id));
         } catch (err) {}
       },
     }),

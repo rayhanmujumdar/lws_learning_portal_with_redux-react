@@ -53,11 +53,14 @@ export default function QuizItems() {
   const handleSubmitQuiz = () => {
     if (quizzes?.length === quizSelectedCount) {
       addQuizMark({
-        student_id,
-        student_name,
-        video_id: quizzes[0].video_id,
-        video_title: quizzes[0].video_title,
-        ...quizMark,
+        id: student_id,
+        data: {
+          student_id,
+          student_name,
+          video_id: quizzes[0].video_id,
+          video_title: quizzes[0].video_title,
+          ...quizMark,
+        },
       });
     }
   };
