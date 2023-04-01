@@ -1,13 +1,19 @@
 import React from "react";
 
-export default function AssignmentRow() {
+export default function AssignmentRow({
+  assignment,
+  openEditModal,
+  openDeleteModal,
+}) {
+  const { id, title, video_title, totalMark } = assignment;
   return (
     <tr>
-      <td className="table-td">Assignment 1 - Scoreboard Application</td>
-      <td className="table-td">JavaScript Bangla Tutorial | JS AJAX | XMLHttp</td>
-      <td className="table-td">100</td>
+      <td className="table-td">{title}</td>
+      <td className="table-td">{video_title}</td>
+      <td className="table-td">{totalMark}</td>
       <td className="table-td flex gap-x-2">
         <svg
+          onClick={() => openDeleteModal(id)}
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
@@ -21,6 +27,7 @@ export default function AssignmentRow() {
           />
         </svg>
         <svg
+          onClick={() => openEditModal(id)}
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"

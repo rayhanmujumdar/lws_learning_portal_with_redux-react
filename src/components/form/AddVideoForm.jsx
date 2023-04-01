@@ -94,7 +94,6 @@ export default function AddVideoForm({ control }) {
             Save
           </button>
         </div>
-        {isError && <Error message="There was an error" />}
       </div>
       {isError && <Error message="There was an error"></Error>}
     </form>

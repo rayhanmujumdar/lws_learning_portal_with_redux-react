@@ -1,8 +1,32 @@
 import { apiSlice } from "../api/apiSlice";
 export const assignmentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getAssignments: builder.query({
+      query: () => `/assignments`,
+    }),
     getAssignment: builder.query({
       query: (id) => `/assignments?video_id_like=${id}`,
+    }),
+    addAssignment: builder.mutation({
+      query: (data) => ({
+        url: "/assignments",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData(
+              "getAssignments",
+              undefined,
+              (draft) => {
+                draft.push(data);
+              }
+            )
+          );
+        } catch (err) {}
+      },
     }),
     addSubmitted: builder.mutation({
       query: ({ id, data }) => ({
@@ -28,7 +52,38 @@ export const assignmentApi = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+    deleteAssignment: builder.mutation({
+      query: (id) => ({
+        url: `/assignments/${id}`,
+        method: "DELETE",
+      }),
+      async onQueryStarted(id, { queryFulfilled, dispatch }) {
+        const optimisticDelete = dispatch(
+          apiSlice.util.updateQueryData(
+            "getAssignments",
+            undefined,
+            (draft) => {
+              const remainingAssignment = draft.filter(
+                (assignment) => assignment.id != id
+              );
+              return remainingAssignment;
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          optimisticDelete.undo();
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetAssignmentQuery, useAddSubmittedMutation } = assignmentApi;
+export const {
+  useGetAssignmentsQuery,
+  useGetAssignmentQuery,
+  useAddSubmittedMutation,
+  useAddAssignmentMutation,
+  useDeleteAssignmentMutation,
+} = assignmentApi;

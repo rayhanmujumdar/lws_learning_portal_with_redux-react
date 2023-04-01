@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../ui/TextInput";
 import { selectAuthUser } from "../../feature/auth/authSelector";
-import { useAddAssignmentMutation } from "../../feature/assignmentMark/assignmentMarkSlice";
+import { useAddAssignmentMarkMutation } from "../../feature/assignmentMark/assignmentMarkSlice";
 import { assignmentApi } from "../../feature/assignments/assignmentsApi";
 import Error from "../ui/error/Error";
 import validUrl from "../../utils/validUrl";
@@ -11,13 +11,14 @@ export default function VideoAssignmentForm({
   control,
   assignment,
   videoTitle,
-  videoId
+  videoId,
 }) {
   const dispatch = useDispatch();
   const { title, id: assignmentId, totalMark } = assignment || {};
   const { id: userId, name } = useSelector(selectAuthUser);
   const [repoLink, setRepoLink] = useState("");
-  const [addAssignment, { isSuccess, isError }] = useAddAssignmentMutation();
+  const [inputError, setInputError] = useState("");
+  const [addAssignment, { isSuccess, isError }] = useAddAssignmentMarkMutation();
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -27,7 +28,7 @@ export default function VideoAssignmentForm({
           data: {
             ...assignment,
             isSubmit: true,
-          }
+          },
         })
       );
       control(false);
@@ -35,7 +36,9 @@ export default function VideoAssignmentForm({
   }, [isSuccess]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validUrl(repoLink))
+    if (!validUrl(repoLink)) {
+      setInputError("Provide a valid url");
+    } else {
       addAssignment({
         student_id: userId,
         student_name: name,
@@ -47,6 +50,7 @@ export default function VideoAssignmentForm({
         repo_link: repoLink,
         status: "pending",
       });
+    }
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
@@ -64,6 +68,7 @@ export default function VideoAssignmentForm({
           required
           title="Github link"
         />
+        {inputError && <p className="text-red-400 pt-1">{inputError} !!</p>}
       </div>
       <div className="flex justify-between items-center">
         <button

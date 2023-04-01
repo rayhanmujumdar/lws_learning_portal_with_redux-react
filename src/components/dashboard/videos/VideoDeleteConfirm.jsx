@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDeleteVideoMutation } from "../../feature/videos/videosApi";
+import React, { useEffect } from "react";
+import { useDeleteVideoMutation } from "../../../feature/videos/videosApi";
 
-export default function DeleteConfirm({ control, videoId }) {
+export default function VideoDeleteConfirm({ control, videoId }) {
   const [deleteVideo, { isSuccess }] = useDeleteVideoMutation();
   useEffect(() => {
     if (isSuccess) {

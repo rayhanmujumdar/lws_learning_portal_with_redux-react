@@ -3,7 +3,7 @@ import VideoTable from "../../components/dashboard/videos/VideoTable";
 import AddVideoForm from "../../components/form/AddVideoForm";
 import EditVideoForm from "../../components/form/EditVideoForm";
 import Modal from "../../components/Modal/Modal";
-import DeleteConfirm from "../../components/ui/DeleteConfirm";
+import VideoDeleteConfirm from "../../components/dashboard/videos/VideoDeleteConfirm";
 export default function Videos() {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -38,10 +38,10 @@ export default function Videos() {
               ></EditVideoForm>
             </Modal>
             <Modal open={deleteModalOpen} control={setDeleteModalOpen}>
-              <DeleteConfirm
+              <VideoDeleteConfirm
                 videoId={videoId}
                 control={setDeleteModalOpen}
-              ></DeleteConfirm>
+              ></VideoDeleteConfirm>
             </Modal>
           </div>
           <div className="overflow-x-auto mt-4">
