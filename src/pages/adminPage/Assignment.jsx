@@ -3,6 +3,7 @@ import AssignmentTable from "../../components/dashboard/assignment/AssignmentTab
 import Modal from "../../components/Modal/Modal";
 import AddAssignment from "../../components/dashboard/assignment/AddAssignment";
 import AssignmentDeleteConfirm from "../../components/dashboard/assignment/AssignmentDeleteConfirm";
+import EditAssignment from "../../components/dashboard/assignment/EditAssignment";
 
 export default function Assignment() {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -22,14 +23,22 @@ export default function Assignment() {
       <div className="mx-auto max-w-full px-5 lg:px-20">
         <div className="px-3 py-20 bg-opacity-10">
           <div className="w-full flex">
-            <button onClick={() => setOpenAddModal(true)} className="btn ml-auto">
+            <button
+              onClick={() => setOpenAddModal(true)}
+              className="btn ml-auto"
+            >
               Add Assignment
             </button>
           </div>
           <Modal open={openAddModal}>
             <AddAssignment control={setOpenAddModal}></AddAssignment>
           </Modal>
-          <Modal open={openEditModal}></Modal>
+          <Modal open={openEditModal}>
+            <EditAssignment
+              control={setOpenEditModal}
+              assignmentId={assignmentId}
+            ></EditAssignment>
+          </Modal>
           <Modal open={openDeleteModal}>
             <AssignmentDeleteConfirm
               control={setOpenDeleteModal}

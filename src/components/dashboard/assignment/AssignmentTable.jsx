@@ -4,7 +4,7 @@ import { useGetAssignmentsQuery } from "../../../feature/assignments/assignments
 import TableLoading from "../../ui/loader/TableLoading";
 import TableError from "../../ui/error/TableError";
 
-export default function AssignmentTable({openDeleteModal,openEditModal}) {
+export default function AssignmentTable({ openDeleteModal, openEditModal }) {
   const { data: assignments, isLoading, isError } = useGetAssignmentsQuery();
   let content = null;
   if (isLoading) {
@@ -17,7 +17,6 @@ export default function AssignmentTable({openDeleteModal,openEditModal}) {
     content = <TableError message="assignment not found"></TableError>;
   }
   if (!isLoading && !isError && assignments.length > 0) {
-    console.log(assignments)
     content = assignments.map((assignment) => (
       <AssignmentRow
         openDeleteModal={openDeleteModal}

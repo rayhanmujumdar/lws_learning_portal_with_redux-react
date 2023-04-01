@@ -100,18 +100,18 @@
   ],
   "assignments": [
     {
-      "id": 1,
-      "title": "Assignment 1 - Implement Debounce Function",
+      "title": "amar bari hajigonj",
       "video_id": 1,
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "totalMark": 100
+      "totalMark": "100",
+      "id": 1
     },
     {
-      "id": 2,
-      "title": "Assignment 2 - Implement Best Practices",
+      "title": "dfss",
       "video_id": 2,
       "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalMark": 100
+      "totalMark": 150,
+      "id": 2
     }
   ],
   "quizzes": [

@@ -7,6 +7,9 @@ export const assignmentApi = apiSlice.injectEndpoints({
     getAssignment: builder.query({
       query: (id) => `/assignments?video_id_like=${id}`,
     }),
+    getAssignmentWithId: builder.query({
+      query: (id) => `/assignments/${id}`,
+    }),
     addAssignment: builder.mutation({
       query: (data) => ({
         url: "/assignments",
@@ -52,6 +55,32 @@ export const assignmentApi = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+    editAssignment: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/assignments/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      async onQueryStarted({ id, data }, { queryFulfilled, dispatch }) {
+        const optimisticEdit = dispatch(
+          apiSlice.util.updateQueryData(
+            "getAssignments",
+            undefined,
+            (draft) => {
+              const assignmentIndex = draft.findIndex(
+                (assignment) => assignment.id == id
+              );
+              draft[assignmentIndex] = data;
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          optimisticEdit.undo();
+        }
+      },
+    }),
     deleteAssignment: builder.mutation({
       query: (id) => ({
         url: `/assignments/${id}`,
@@ -86,4 +115,6 @@ export const {
   useAddSubmittedMutation,
   useAddAssignmentMutation,
   useDeleteAssignmentMutation,
+  useEditAssignmentMutation,
+  useGetAssignmentWithIdQuery,
 } = assignmentApi;

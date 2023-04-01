@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import TextInput from "../ui/TextInput";
 import NumberInput from "../ui/numberInput";
-import { useGetVideosQuery } from "../../feature/videos/videosApi";
 import {
-  useAddAssignmentMutation,
-  useGetAssignmentsQuery,
+  useEditAssignmentMutation,
+  useGetAssignmentWithIdQuery,
 } from "../../feature/assignments/assignmentsApi";
-import filterAssignmentVideo from "../../utils/filterAssingmentVideo";
 
-export default function AddAssignmentFrom({ control }) {
+export default function EditAssignmentFrom({ control, assignmentId }) {
   const [title, setTitle] = useState("");
   const [totalMark, setTotalMark] = useState("");
-  const [videoId, setVideoId] = useState(null);
-  const { data: videos } = useGetVideosQuery();
-  const { data: assignments } = useGetAssignmentsQuery();
-  const [addAssignment, { isSuccess, isLoading, isError }] =
-    useAddAssignmentMutation();
-  const remainingAssignmentVideo = filterAssignmentVideo(assignments, videos);
+  const { data: assignment, isSuccess: assignmentSuccess } =
+    useGetAssignmentWithIdQuery(assignmentId);
+  const [editAssignment, { isSuccess }] = useEditAssignmentMutation();
+  useEffect(() => {
+    if (assignment?.id) {
+      setTitle(assignment.title);
+      setTotalMark(assignment.totalMark);
+    }
+  }, [assignmentId, assignmentSuccess]);
   useEffect(() => {
     if (isSuccess) {
       control(false);
@@ -24,14 +25,13 @@ export default function AddAssignmentFrom({ control }) {
   }, [isSuccess]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { id: video_id, title: video_title } = videos.find(
-      (video) => video.id == videoId
-    );
-    addAssignment({
-      title,
-      video_id,
-      video_title,
-      totalMark: Number(totalMark),
+    editAssignment({
+      id: assignmentId,
+      data: {
+        ...assignment,
+        title,
+        totalMark: Number(totalMark),
+      },
     });
   };
   return (
@@ -59,31 +59,6 @@ export default function AddAssignmentFrom({ control }) {
                 required
               />
             </div>
-            <div className="col-span-6">
-              <label
-                className="block text-sm font-medium text-gray-300"
-                htmlFor="videoTitle"
-              >
-                Video title
-              </label>
-              <select
-                onChange={(e) => setVideoId(e.target.value)}
-                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block text-lg pl-1 w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 text-gray-600"
-                name="videoTitle"
-                required
-              >
-                <option value="" selected disabled hidden>
-                  {remainingAssignmentVideo?.length > 0
-                    ? "choose assignment video title"
-                    : "All video assignments was already added"}
-                </option>
-                {remainingAssignmentVideo?.map((video) => (
-                  <option key={video?.id} value={video?.id}>
-                    {video?.title}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
         </div>
         <div className="px-4 py-3 flex justify-between bg-[#080E1B] text-right sm:px-6">
@@ -94,7 +69,7 @@ export default function AddAssignmentFrom({ control }) {
             Cancel
           </button>
           <button
-            disabled={isLoading}
+            // disabled={isLoading}
             type="submit"
             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-green-500"
           >
@@ -102,7 +77,7 @@ export default function AddAssignmentFrom({ control }) {
           </button>
         </div>
       </div>
-      {isError && <Error message="There was an error"></Error>}
+      {/* {isError && <Error message="There was an error"></Error>} */}
     </form>
   );
 }
