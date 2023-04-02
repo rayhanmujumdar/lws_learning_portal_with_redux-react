@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TextInput from "../ui/TextInput";
 import { selectAuthUser } from "../../feature/auth/authSelector";
 import { useAddAssignmentMarkMutation } from "../../feature/assignmentMark/assignmentMarkSlice";
-import { assignmentApi } from "../../feature/assignments/assignmentsApi";
 import Error from "../ui/error/Error";
 import validUrl from "../../utils/validUrl";
 

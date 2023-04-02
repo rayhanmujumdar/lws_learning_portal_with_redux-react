@@ -72,7 +72,7 @@ export default function AddAssignmentFrom({ control }) {
                 name="videoTitle"
                 required
               >
-                <option value="" selected disabled hidden>
+                <option value="" hidden>
                   {remainingAssignmentVideo?.length > 0
                     ? "choose assignment video title"
                     : "All video assignments was already added"}

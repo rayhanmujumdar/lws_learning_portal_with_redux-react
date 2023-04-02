@@ -30,7 +30,6 @@ export default function LoginForm() {
   };
   useEffect(() => {
     if (isSuccess || accessToken) {
-      console.log(from);
       navigate(from, { replace: true });
     } else if (isError) {
       setLogInError(error?.data);

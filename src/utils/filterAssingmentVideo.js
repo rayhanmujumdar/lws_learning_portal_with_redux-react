@@ -1,17 +1,11 @@
 const filterAssignmentVideo = (assignments, videos) => {
   let filterVideo = [];
-  if (videos?.length > 0) {
+  if (videos?.length > 0 && assignments?.length !== videos?.length) {
     videos.forEach((video) => {
-      if (assignments.length > 0) {
-        assignments.forEach((assignment) => {
-          if (video.id !== assignment.video_id) {
-            filterVideo.push(video);
-            if (videos.length === assignments.length) {
-              filterVideo = [];
-            }
-          }
-        });
-      } else {
+      const index = assignments.findIndex(
+        (assignment) => assignment.video_id === video.id
+      );
+      if (index === -1) {
         filterVideo.push(video);
       }
     });

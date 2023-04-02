@@ -8,13 +8,13 @@ import { format } from "date-fns";
 import Player from "./Player";
 import { useGetRelatedQuizQuery } from "../../feature/quizzes/quizApi";
 import { clearQuizState } from "../../feature/quizzes/quizSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useGetAssignmentQuery } from "../../feature/assignments/assignmentsApi";
-import Modal from "../Modal/Modal";
-import VideoAssignmentForm from "../form/VideoAssignmentForm";
 import { useGetQuizMarkQuery } from "../../feature/quizMark/quizMarkAPi";
 import { selectAuthUser } from "../../feature/auth/authSelector";
 import { useGetAssignmentMarkQuery } from "../../feature/assignmentMark/assignmentMarkSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetAssignmentQuery } from "../../feature/assignments/assignmentsApi";
+import VideoAssignmentForm from "../form/VideoAssignmentForm";
+import Modal from "../Modal/Modal";
 
 export default function Description() {
   const user = useSelector(selectAuthUser);
@@ -28,11 +28,9 @@ export default function Description() {
   const { data: userSubmittedAssignment } = useGetAssignmentMarkQuery(user.id);
   const { id, title, description, url, createdAt } = video || {};
   const { data: userSubmittedQuiz } = useGetQuizMarkQuery(user.id);
-
   const videoSubmittedQuiz = userSubmittedQuiz?.find(
     (quiz) => quiz.video_id === Number(videoId)
   );
-  console.log(videoId);
   const videoSubmittedAssignment = userSubmittedAssignment?.find(
     (submittedAssignment) => {
       if (assignment?.length > 0) {

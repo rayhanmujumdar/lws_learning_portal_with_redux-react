@@ -12,10 +12,6 @@ const initialState = {
     mark: undefined,
   },
 };
-const searchId = (id, quiz) => {
-  console.log(quiz.every((q) => q.id !== id));
-  return;
-};
 
 const quizSlice = createSlice({
   name: "quizSlice",
@@ -57,11 +53,12 @@ const quizSlice = createSlice({
         return correctQuiz(isCorrect, isSelected);
       }).length;
       const totalQuiz = state.selectedQuiz.length;
+      const perQuizMark = 5;
       state.quizMark.totalQuiz = totalQuiz;
       state.quizMark.totalCorrect = findCorrect;
       state.quizMark.totalWrong = totalQuiz - findCorrect;
-      state.quizMark.totalMark = totalQuiz * state.quizMark.mark;
-      state.quizMark.mark = findCorrect * 5;
+      state.quizMark.totalMark = totalQuiz * perQuizMark;
+      state.quizMark.mark = findCorrect * perQuizMark;
     },
     clearQuizState: (state) => {
       state.quizSelectedCount = 0;
