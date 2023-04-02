@@ -20,5 +20,6 @@ export const apiSlice = createApi({
     }
     return result;
   },
+  tagTypes: ["quizMark", "assignmentMark"],
   endpoints: (builder) => ({}),
 });

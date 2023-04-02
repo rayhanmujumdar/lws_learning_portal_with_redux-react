@@ -3,6 +3,7 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAssignmentMark: builder.query({
       query: (id) => `/assignmentMark?student_id_like=${id}`,
+      providesTags: ["assignmentMark"],
     }),
     addAssignmentMark: builder.mutation({
       query: (data) => ({
@@ -10,6 +11,7 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["assignmentMark"],
     }),
   }),
 });

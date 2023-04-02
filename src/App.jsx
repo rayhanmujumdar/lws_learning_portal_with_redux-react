@@ -18,7 +18,6 @@ import LoggedRoute from "./components/LoggedRoute";
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import StudentRoute from "./components/studentRoute/StudentRoute";
 import Description from "./components/studentCourseVideos/Description";
-import defaultPlayerRouteId from "./utils/defaultPlayerRouteId";
 
 function App() {
   const match = useMatchPathName(["/student/register", "/", "/admin/login"]);

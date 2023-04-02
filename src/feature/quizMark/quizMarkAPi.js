@@ -5,6 +5,7 @@ export const quizMarkApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getQuizMark: builder.query({
       query: (id) => `/quizMark?student_id_like=${id}`,
+      providesTags: ["quizMark"],
     }),
     addQuizMark: builder.mutation({
       query: ({ data }) => ({
@@ -12,11 +13,12 @@ export const quizMarkApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["quizMark"],
       async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
         try {
-          const { data } = await queryFulfilled;
-          if (data?.id) {
-            dispatch(submittedQuizMarkUpdatedCache({ id, mark: data.mark }));
+          const { data: quiz } = await queryFulfilled;
+          if (quiz?.id) {
+            dispatch(submittedQuizMarkUpdatedCache({ id, mark: quiz.mark }));
           }
         } catch {}
       },

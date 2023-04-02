@@ -6,14 +6,18 @@ import Loading from "../ui/loader/Loading";
 import Error from "../ui/error/Error";
 import { format } from "date-fns";
 import Player from "./Player";
-import { useGetRelatedQuizQuery } from "../../feature/quizzes/QuizApi";
+import { useGetRelatedQuizQuery } from "../../feature/quizzes/quizApi";
 import { clearQuizState } from "../../feature/quizzes/quizSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetAssignmentQuery } from "../../feature/assignments/assignmentsApi";
 import Modal from "../Modal/Modal";
 import VideoAssignmentForm from "../form/VideoAssignmentForm";
+import { useGetQuizMarkQuery } from "../../feature/quizMark/quizMarkAPi";
+import { selectAuthUser } from "../../feature/auth/authSelector";
+import { useGetAssignmentMarkQuery } from "../../feature/assignmentMark/assignmentMarkSlice";
 
 export default function Description() {
+  const user = useSelector(selectAuthUser);
   const { videoId } = useParams();
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState();
@@ -21,7 +25,21 @@ export default function Description() {
   const { data: relatedQuiz } = useGetRelatedQuizQuery(videoId);
   const { data: assignment, isSuccess: isSuccessAssignment } =
     useGetAssignmentQuery(videoId);
-  const { id,title, description, url, createdAt } = video || {};
+  const { data: userSubmittedAssignment } = useGetAssignmentMarkQuery(user.id);
+  const { id, title, description, url, createdAt } = video || {};
+  const { data: userSubmittedQuiz } = useGetQuizMarkQuery(user.id);
+
+  const videoSubmittedQuiz = userSubmittedQuiz?.find(
+    (quiz) => quiz.video_id === Number(videoId)
+  );
+  console.log(videoId);
+  const videoSubmittedAssignment = userSubmittedAssignment?.find(
+    (submittedAssignment) => {
+      if (assignment?.length > 0) {
+        return submittedAssignment.assignment_id === assignment[0]?.id;
+      }
+    }
+  );
   useEffect(() => {
     dispatch(clearQuizState());
   }, [dispatch]);
@@ -60,27 +78,28 @@ export default function Description() {
             Uploaded on {dateFormat}
           </h2>
           <div className="flex gap-4">
-            {assignment?.length > 0 && !assignment[0]?.isSubmit ? (
+            {assignment?.length > 0 && !videoSubmittedAssignment?.id && (
               <button
                 onClick={() => setModalOpen(true)}
                 className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary"
               >
                 এসাইনমেন্ট
               </button>
-            ) : (
+            )}
+            {videoSubmittedAssignment?.id && (
               <p className="px-3 font-bold py-1 border border-gray-500 text-gray-500 rounded-full text-sm ">
                 এসাইনমেন্ট submitted
               </p>
             )}
-
-            {relatedQuiz?.length > 0 && !relatedQuiz[0].isSubmit ? (
+            {relatedQuiz?.length > 0 && !videoSubmittedQuiz?.id && (
               <Link
                 to={`/student/Quiz/${videoId}`}
                 className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary"
               >
                 কুইজে অংশগ্রহণ করুন
               </Link>
-            ) : (
+            )}
+            {videoSubmittedQuiz?.id && (
               <p className="px-3 font-bold py-1 border border-gray-500 text-gray-500 rounded-full text-sm ">
                 কুইজ submitted
               </p>

@@ -14,7 +14,7 @@ export default function AssignmentTable({ openDeleteModal, openEditModal }) {
     content = <TableError message="There was an error"></TableError>;
   }
   if (!isLoading && !isError && assignments.length === 0) {
-    content = <TableError message="assignment not found"></TableError>;
+    content = <TableError message="Add new assignment"></TableError>;
   }
   if (!isLoading && !isError && assignments.length > 0) {
     content = assignments.map((assignment) => (

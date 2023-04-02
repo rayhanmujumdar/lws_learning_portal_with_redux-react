@@ -59,7 +59,7 @@
     {
       "email": "rayhanmujumdar0177@gmail.com",
       "password": "$2a$10$V.QR27Ps8sXGg87Y0iFB2OAmhmguTv0R0CvqUaCiVeMtCmQRdT4fS",
-      "namne": "Rayhan",
+      "name": "Rayhan",
       "role": "admin",
       "id": 9
     },
@@ -71,11 +71,11 @@
       "id": 10
     },
     {
-      "email": "rayhan1@gmail.com",
-      "password": "$2a$10$h4sqFoUtzdc.KCFFEoWCz.ikkfw6vfeukR8r89AS6Udjy6ZzpSeBK",
-      "name": "rayhan",
+      "email": "rayhan12@gmail.com",
+      "password": "$2a$10$i5fv4aEAmJEzr7Pqm7bW1OBjXU4UPhMYb7OiS3COFslAp8HNzeORG",
+      "name": "Rayhan Mujumdar",
       "role": "student",
-      "id": 11
+      "id": 12
     }
   ],
   "videos": [
@@ -96,22 +96,24 @@
       "views": "91.2K",
       "duration": "31:30",
       "createdAt": "2023-02-24T17:59:00.000Z"
+    },
+    {
+      "title": "K'NAAN - Wavin' Flag (Coca-Cola Celebration Mix)",
+      "url": "https://www.youtube.com/embed/WTJSt4wP2ME",
+      "description": "LatinAutor, CMRRA, UMPI, Kobalt Music Publishing, SOLAR Music Rights Management, LatinAutor - Warner Chappell, Sony Music Publishing, LatinAutor - SonyATV, Warner Chappell, LatinAutorPerf, PEDL, Abramus Digital, AMRA, BMI - Broadcast Music Inc., UMPG Publishing, BMG Rights Management (US), LLC, UNIAO BRASILEIRA DE EDITORAS DE MUSICA - UBEM, ARESA, LatinAutor - UMPG, LatinAutor - PeerMusic, Global Music Rights LLC, and 17 Music Rights Societies",
+      "duration": "3:30",
+      "views": "3.4k",
+      "createdAt": "2023-04-01T20:49:57.011Z",
+      "id": 3
     }
   ],
   "assignments": [
     {
-      "title": "amar bari hajigonj",
-      "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "totalMark": "100",
+      "title": "why everybody listen this song??",
+      "video_id": 3,
+      "video_title": "K'NAAN - Wavin' Flag (Coca-Cola Celebration Mix)",
+      "totalMark": 200,
       "id": 1
-    },
-    {
-      "title": "dfss",
-      "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalMark": 150,
-      "id": 2
     }
   ],
   "quizzes": [
@@ -236,6 +238,18 @@
       "mark": 50,
       "repo_link": "https://github.com/Learn-with-Sumit/assignment-1",
       "status": "published"
+    },
+    {
+      "student_id": 8,
+      "student_name": "Rayhan M",
+      "assignment_id": 1,
+      "title": "why everybody listen this song??",
+      "createdAt": "2023-04-02T11:12:56.401Z",
+      "totalMark": 200,
+      "mark": 0,
+      "repo_link": "https://redux-toolkit.js.org/rtk-query/usage/automated-refetching",
+      "status": "pending",
+      "id": 3
     }
   ],
   "quizMark": [

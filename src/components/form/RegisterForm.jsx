@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Error from "../ui/error/Error";
 import { selectAuth } from "../../feature/auth/authSelector";
 import { useSelector } from "react-redux";
-import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 
 export default function RegisterForm() {
-  const videoId = defaultPlayerRouteId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,8 +27,11 @@ export default function RegisterForm() {
     }
   };
   useEffect(() => {
-    if (isSuccess || accessToken) navigate(`/student/course-player/${videoId}`);
-    else if (isError) setRegisterError(error?.data);
+    if (isSuccess || accessToken) {
+      navigate(`/student/course-player/1`);
+    } else if (isError) {
+      setRegisterError(error?.data);
+    }
   }, [isSuccess, isError]);
   return (
     <form

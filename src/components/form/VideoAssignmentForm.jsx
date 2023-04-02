@@ -10,27 +10,15 @@ import validUrl from "../../utils/validUrl";
 export default function VideoAssignmentForm({
   control,
   assignment,
-  videoTitle,
-  videoId,
+  videoTitle
 }) {
-  const dispatch = useDispatch();
   const { title, id: assignmentId, totalMark } = assignment || {};
   const { id: userId, name } = useSelector(selectAuthUser);
   const [repoLink, setRepoLink] = useState("");
   const [inputError, setInputError] = useState("");
   const [addAssignment, { isSuccess, isError }] = useAddAssignmentMarkMutation();
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(
-        assignmentApi.endpoints.addSubmitted.initiate({
-          id: assignmentId,
-          videoId,
-          data: {
-            ...assignment,
-            isSubmit: true,
-          },
-        })
-      );
+    if (isSuccess && !isError) {
       control(false);
     }
   }, [isSuccess]);
@@ -58,7 +46,8 @@ export default function VideoAssignmentForm({
         <h1 className="lg:text-3xl md:text-2xl capitalize text-center">
           {videoTitle}
         </h1>
-        <h3 className="md:text-2xl text-center">{title}</h3>
+        <h3 className="md:text-2xl text-center">Assignment Name :- {title}</h3>
+        <p className="md:text-lg text-center">Assignment Mark : {totalMark}</p>
       </div>
       <div>
         <TextInput
