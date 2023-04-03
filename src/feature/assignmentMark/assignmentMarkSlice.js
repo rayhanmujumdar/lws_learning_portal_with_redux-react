@@ -1,20 +1,25 @@
-import { apiSlice } from "../../feature/api/apiSlice";
-export const assignmentMarkApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    getAssignmentMark: builder.query({
-      query: (id) => `/assignmentMark?student_id_like=${id}`,
-      providesTags: ["assignmentMark"],
-    }),
-    addAssignmentMark: builder.mutation({
-      query: (data) => ({
-        url: `/assignmentMark`,
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["assignmentMark"],
-    }),
-  }),
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+  total: 0,
+  pending: 0,
+  markSent: 0,
+};
+
+const assignmentMarkSlice = createSlice({
+  name: "assignmentMarkSlice",
+  initialState,
+  reducers: {
+    updateStatus: (state, action) => {
+      state.total = action.payload.length;
+      state.pending = action.payload.filter(
+        (assignmentMark) => assignmentMark.status === "pending"
+      ).length;
+      state.markSent = action.payload.filter(
+        (assignmentMark) => assignmentMark.status === "published"
+      ).length;
+    },
+  },
 });
 
-export const { useGetAssignmentMarkQuery, useAddAssignmentMarkMutation } =
-  assignmentMarkApi;
+export default assignmentMarkSlice.reducer
+export const {updateStatus} = assignmentMarkSlice.actions

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import TextInput from "../ui/TextInput";
 import { selectAuthUser } from "../../feature/auth/authSelector";
-import { useAddAssignmentMarkMutation } from "../../feature/assignmentMark/assignmentMarkSlice";
+import { useAddAssignmentMarkMutation } from "../../feature/assignmentMark/assignmentMarkApi";
 import Error from "../ui/error/Error";
 import validUrl from "../../utils/validUrl";
 

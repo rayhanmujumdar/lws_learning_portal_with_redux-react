@@ -10,7 +10,7 @@ import { useGetRelatedQuizQuery } from "../../feature/quizzes/quizApi";
 import { clearQuizState } from "../../feature/quizzes/quizSlice";
 import { useGetQuizMarkQuery } from "../../feature/quizMark/quizMarkAPi";
 import { selectAuthUser } from "../../feature/auth/authSelector";
-import { useGetAssignmentMarkQuery } from "../../feature/assignmentMark/assignmentMarkSlice";
+import { useGetAssignmentMarkQuery } from "../../feature/assignmentMark/assignmentMarkApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAssignmentQuery } from "../../feature/assignments/assignmentsApi";
 import AssignmentSubmitForm from "../form/AssignmentSubmitForm";

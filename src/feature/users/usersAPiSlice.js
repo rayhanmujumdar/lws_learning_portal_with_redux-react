@@ -1,5 +1,5 @@
 import { apiSlice } from "../../feature/api/apiSlice";
-import { assignmentMarkApi } from "../assignmentMark/assignmentMarkSlice";
+import { assignmentMarkApi } from "../assignmentMark/assignmentMarkApi";
 import { addToLeaderboard, addMyRank } from "../leaderboard/leaderboardSlice";
 import { quizMarkApi } from "../quizMark/quizMarkAPi";
 export const usersSlice = apiSlice.injectEndpoints({

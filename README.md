@@ -101,7 +101,7 @@
 - Assignment
 - Quiz
 
-**Assignment**: Students can submit the link to their assignments on Git by using the pop-up modal.
+**Assignment**: Students can submit the link to their assignments on Git link by using the pop-up modal.
 
 **Quiz**: This section contains a quiz related to video content. Students can answer the quiz questions and receive marks.
 

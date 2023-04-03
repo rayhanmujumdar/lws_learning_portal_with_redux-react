@@ -130,6 +130,20 @@
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
       "totalMark": 100,
       "id": 2
+    },
+    {
+      "title": "sdfsdf",
+      "video_id": 2,
+      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "totalMark": 33,
+      "id": 3
+    },
+    {
+      "title": "sdfds",
+      "video_id": 4,
+      "video_title": "roddy rich song",
+      "totalMark": 33,
+      "id": 4
     }
   ],
   "quizzes": [
@@ -263,9 +277,9 @@
       "title": "Assignment 1 - Implement Debounce Function",
       "createdAt": "2021-01-15T15:17:01.727Z",
       "totalMark": 100,
-      "mark": 0,
+      "mark": 100,
       "repo_link": "https://github.com/Learn-with-Sumit/assignment-1",
-      "status": "pending"
+      "status": "published"
     },
     {
       "id": 2,
@@ -280,7 +294,7 @@
       "status": "published"
     },
     {
-      "id": 2,
+      "id": 3,
       "student_id": 3,
       "student_name": "Akash Ahmed",
       "assignment_id": 1,
@@ -298,10 +312,34 @@
       "title": "why everybody listen this song??",
       "createdAt": "2023-04-02T11:12:56.401Z",
       "totalMark": 200,
-      "mark": 0,
+      "mark": 200,
       "repo_link": "https://redux-toolkit.js.org/rtk-query/usage/automated-refetching",
-      "status": "pending",
-      "id": 3
+      "status": "published",
+      "id": 4
+    },
+    {
+      "student_id": 8,
+      "student_name": "Rayhan M",
+      "assignment_id": 2,
+      "title": "Create a debounce function",
+      "createdAt": "2023-04-03T19:58:18.874Z",
+      "totalMark": 100,
+      "mark": 100,
+      "repo_link": "https://stackabuse.com/insertion-sort-in-javascript/",
+      "status": "published",
+      "id": 5
+    },
+    {
+      "student_id": 8,
+      "student_name": "Rayhan M",
+      "assignment_id": 4,
+      "title": "sdfds",
+      "createdAt": "2023-04-03T20:00:01.741Z",
+      "totalMark": 33,
+      "mark": 33,
+      "repo_link": "https://stackabuse.com/insertion-sort-in-javascript/",
+      "status": "published",
+      "id": 6
     }
   ],
   "quizMark": [
