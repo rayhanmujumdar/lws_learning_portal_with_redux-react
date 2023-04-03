@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../feature/auth/authApi";
 import { selectAuth } from "../../feature/auth/authSelector";
 import { useCheckRole } from "../../hooks/useCheckRole";
-import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 import validateEmail from "../../utils/validEmail";
 import Error from "../ui/error/Error";
 

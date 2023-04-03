@@ -42,11 +42,10 @@ export const usersSlice = apiSlice.injectEndpoints({
             };
             usersResult.push(userResult);
           }
-          dispatch(
-            addToLeaderboard(
-              usersResult.sort((a, b) => b.totalMark - a.totalMark)
-            )
+          const sortedUser = usersResult.sort(
+            (a, b) => b.totalMark - a.totalMark
           );
+          dispatch(addToLeaderboard(sortedUser));
           dispatch(addMyRank(user?.id));
         } catch (err) {}
       },

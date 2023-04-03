@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { usersSlice } from "../../feature/users/usersAPiSlice";
 import TableHead from "./TableHead";
 import TableRow from "./TableRow";
@@ -14,8 +14,8 @@ export default function resultTable() {
     <table className="text-base w-full border border-slate-600/50 rounded-md my-4">
       <TableHead></TableHead>
       <tbody>
-        {leaderBoard.map((result, rank) => (
-          <TableRow key={result.id} rank={rank + 1} result={result}></TableRow>
+        {leaderBoard?.slice(0, 20).map((result, rank) => (
+          <TableRow key={result?.id} rank={rank + 1} result={result}></TableRow>
         ))}
       </tbody>
     </table>

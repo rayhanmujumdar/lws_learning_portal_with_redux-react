@@ -6,7 +6,7 @@ import { useAddAssignmentMarkMutation } from "../../feature/assignmentMark/assig
 import Error from "../ui/error/Error";
 import validUrl from "../../utils/validUrl";
 
-export default function VideoAssignmentForm({
+export default function AssignmentSubmitForm({
   control,
   assignment,
   videoTitle

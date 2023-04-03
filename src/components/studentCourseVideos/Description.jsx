@@ -13,7 +13,7 @@ import { selectAuthUser } from "../../feature/auth/authSelector";
 import { useGetAssignmentMarkQuery } from "../../feature/assignmentMark/assignmentMarkSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAssignmentQuery } from "../../feature/assignments/assignmentsApi";
-import VideoAssignmentForm from "../form/VideoAssignmentForm";
+import AssignmentSubmitForm from "../form/AssignmentSubmitForm";
 import Modal from "../Modal/Modal";
 
 export default function Description() {
@@ -52,12 +52,12 @@ export default function Description() {
   if (isSuccessAssignment) {
     modal = (
       <Modal open={modalOpen}>
-        <VideoAssignmentForm
+        <AssignmentSubmitForm
           control={setModalOpen}
           assignment={assignment[0]}
           videoTitle={title}
           videoId={id}
-        ></VideoAssignmentForm>
+        ></AssignmentSubmitForm>
       </Modal>
     );
   }

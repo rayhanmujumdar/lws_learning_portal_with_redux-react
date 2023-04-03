@@ -17,6 +17,16 @@ export const quizApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
+        try {
+          const { data: quiz } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData("getQuizzes", undefined, (draft) => {
+              draft.push(quiz);
+            })
+          );
+        } catch (err) {}
+      },
     }),
     editQuiz: builder.mutation({
       query: ({ id, data }) => ({
@@ -24,6 +34,17 @@ export const quizApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
+        try {
+          const { data: quiz } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData("getQuizzes", undefined, (draft) => {
+              const quizIndex = draft.findIndex((quiz) => quiz.id == id);
+              draft[quizIndex] = quiz;
+            })
+          );
+        } catch (err) {}
+      },
     }),
     deleteQuiz: builder.mutation({
       query: (id) => ({
@@ -50,7 +71,7 @@ export const {
   useGetQuizzesQuery,
   useGetQuizQuery,
   useGetRelatedQuizQuery,
-  useAddQuizzesMutation,
-  useEditQuizzesMutation,
+  useAddQuizMutation,
+  useEditQuizMutation,
   useDeleteQuizMutation,
 } = quizApi;
