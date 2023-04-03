@@ -6,10 +6,11 @@ export const usersSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => `/users`,
+      providesTags: ["leaderboard"],
       async onQueryStarted(_, { dispatch, queryFulfilled, getState }) {
-        const user = getState().auth.user;
         try {
           const { data: users } = await queryFulfilled;
+          const user = getState().auth.user;
           const usersResult = [];
           for (const user of users) {
             const { data: quizMark } = await dispatch(

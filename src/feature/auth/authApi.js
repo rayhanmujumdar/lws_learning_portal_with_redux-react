@@ -8,6 +8,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["leaderboard"],
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const { data } = await queryFulfilled;
@@ -35,4 +36,4 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {useLoginMutation,useRegisterMutation} = authApi
+export const { useLoginMutation, useRegisterMutation } = authApi;

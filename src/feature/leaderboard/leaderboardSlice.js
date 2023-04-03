@@ -13,6 +13,7 @@ const leaderboardSlice = createSlice({
       state.leaderboard = action.payload;
     },
     addMyRank: (state, action) => {
+      console.log(action.payload);
       const userIndex = state.leaderboard.findIndex(
         (userResult) => userResult.id === action.payload
       );
