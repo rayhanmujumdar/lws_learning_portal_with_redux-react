@@ -5,7 +5,6 @@ import { useAddQuizMutation } from "../../feature/quizzes/quizApi";
 import { useGetVideosQuery } from "../../feature/videos/videosApi";
 
 const maxId = (options) => {
-  console.log(options);
   return options.reduce((acc, cur) => Math.max(acc, cur.id), 0) + 1;
 };
 
@@ -37,7 +36,6 @@ export default function AddQuizForm({ control }) {
     });
   };
   const handleChecked = (e, option) => {
-    console.log(e.target.checked);
     setOptions((options) => {
       return options.map((op) => {
         if (op.id === option.id) {
