@@ -19,14 +19,16 @@ export default function MarkTableRow({ assignmentMark }) {
   const date = format(new Date(createdAt), "hh MMM yyyy");
   const time = format(new Date(createdAt), "pp");
   const handleMarkSubmit = () => {
-    updateAssignmentMark({
-      id,
-      data: {
-        ...assignmentMark,
-        mark: inputMark,
-        status: "published"
-      },
-    });
+    if (typeof Number(inputMark) === "number") {
+      updateAssignmentMark({
+        id,
+        data: {
+          ...assignmentMark,
+          mark: Number(inputMark),
+          status: "published",
+        },
+      });
+    }
   };
   return (
     <tr>
@@ -40,6 +42,7 @@ export default function MarkTableRow({ assignmentMark }) {
         <td className="table-td input-mark">
           <input
             required
+            type="number"
             onChange={(e) => setInputMark(e.target.value)}
             max={totalMark}
             value={inputMark}

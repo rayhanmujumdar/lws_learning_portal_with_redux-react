@@ -3,11 +3,8 @@ import MarkTableRow from "./MarkTableRow";
 import { useGetAllAssignmentMarkQuery } from "../../../feature/assignmentMark/assignmentMarkApi";
 import TableLoading from "../../ui/loader/TableLoading";
 import TableError from "../../ui/error/TableError";
-import {useDispatch} from "react-redux"
-import { updateStatus } from "../../../feature/assignmentMark/assignmentMarkSlice";
 
 export default function MarkTable() {
-  const dispatch = useDispatch()
   const {
     data: allAssignmentMark,
     isLoading,
@@ -24,7 +21,6 @@ export default function MarkTable() {
     content = <TableError message="No assignment submitted"></TableError>;
   }
   if (!isLoading && !isError && allAssignmentMark.length > 0) {
-    dispatch(updateStatus(allAssignmentMark));
     content = allAssignmentMark.map((assignmentMark) => (
       <MarkTableRow
         key={assignmentMark.id}
@@ -44,9 +40,7 @@ export default function MarkTable() {
         </tr>
       </thead>
 
-      <tbody className="divide-y divide-slate-600/50">
-        {content}
-      </tbody>
+      <tbody className="divide-y divide-slate-600/50">{content}</tbody>
     </table>
   );
 }

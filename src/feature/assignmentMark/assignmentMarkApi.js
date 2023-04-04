@@ -1,8 +1,19 @@
+import { updateStatus } from "../assignmentMark/assignmentMarkSlice";
 import { apiSlice } from "../api/apiSlice";
 export const assignmentMarkApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllAssignmentMark: builder.query({
       query: () => `/assignmentMark`,
+      async onCacheEntryAdded(
+        _,
+        { cacheDataLoaded, cacheEntryRemoved, dispatch }
+      ) {
+        try {
+          const { data } = await cacheDataLoaded;
+          dispatch(updateStatus(data));
+          cacheEntryRemoved;
+        } catch (err) {}
+      },
     }),
     getAssignmentMark: builder.query({
       query: (id) => `/assignmentMark?student_id_like=${id}`,
@@ -41,7 +52,7 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
           optimisticUpdateMark.undo();
         }
       },
-    }),
+    })
   }),
 });
 

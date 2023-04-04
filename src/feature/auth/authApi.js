@@ -3,7 +3,7 @@ import { loggedUser } from "./authSlice";
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: (data) => ({
+      query: ({data}) => ({
         url: "/login",
         method: "POST",
         body: data,
@@ -24,6 +24,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["leaderboard"],
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const { data } = await queryFulfilled;

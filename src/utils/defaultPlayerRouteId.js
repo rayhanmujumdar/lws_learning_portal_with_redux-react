@@ -1,5 +1,6 @@
 const defaultPlayerRouteId = () => {
-  return JSON.parse(localStorage.getItem("videoId"));
+  const videoId = JSON.parse(localStorage.getItem("videoId"));
+  return videoId;
 };
 
 export default defaultPlayerRouteId;

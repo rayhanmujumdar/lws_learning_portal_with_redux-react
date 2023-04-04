@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Error from "../ui/error/Error";
 import { selectAuth } from "../../feature/auth/authSelector";
 import { useSelector } from "react-redux";
+import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 
 export default function RegisterForm() {
+  const videoId = defaultPlayerRouteId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +30,10 @@ export default function RegisterForm() {
   };
   useEffect(() => {
     if (isSuccess || accessToken) {
-      navigate(`/student/course-player/1`);
+      const redirect = videoId
+        ? `/student/course-player/${videoId}`
+        : `/student/course-player`;
+      navigate(redirect);
     } else if (isError) {
       setRegisterError(error?.data);
     }

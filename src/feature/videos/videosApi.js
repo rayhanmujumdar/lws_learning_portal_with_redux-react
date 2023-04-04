@@ -1,4 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
+import { assignmentApi } from "../assignments/assignmentsApi";
+import { quizApi } from "../quizzes/quizApi";
 export const videosApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVideos: builder.query({
@@ -66,6 +68,43 @@ export const videosApi = apiSlice.injectEndpoints({
         );
         try {
           await queryFulfilled;
+          const { data: relatedAssignments } = await dispatch(
+            assignmentApi.endpoints.getAssignment.initiate(id)
+          );
+          const { data: relatedQuizzes } = await dispatch(
+            quizApi.endpoints.getRelatedQuiz.initiate(id)
+          );
+          relatedAssignments.forEach(async (assignment) => {
+            await dispatch(
+              assignmentApi.endpoints.deleteAssignment.initiate(assignment.id)
+            );
+            dispatch(
+              apiSlice.util.updateQueryData(
+                "getAssignments",
+                undefined,
+                (draft) => {
+                  return draft.filter(
+                    (existingAssignment) =>
+                      existingAssignment.id !== assignment.id
+                  );
+                }
+              )
+            );
+          });
+          relatedQuizzes.forEach(async (quiz) => {
+            await dispatch(quizApi.endpoints.deleteQuiz.initiate(quiz.id));
+            dispatch(
+              apiSlice.util.updateQueryData(
+                "getQuizzes",
+                undefined,
+                (draft) => {
+                  return draft.filter(
+                    (existingQuiz) => existingQuiz.id !== quiz.id
+                  );
+                }
+              )
+            );
+          });
         } catch (err) {
           optimisticDelete.undo();
         }

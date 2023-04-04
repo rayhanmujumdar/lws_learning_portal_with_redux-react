@@ -14,7 +14,8 @@ export default function Navbar() {
   const isAdmin = useCheckRole("admin");
   const dispatch = useDispatch();
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
     dispatch(loggedOut());
   };
   return (

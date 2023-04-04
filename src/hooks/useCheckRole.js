@@ -6,4 +6,5 @@ export const useCheckRole = (userRole) => {
   if (userRole === role) {
     return true;
   }
+  return false
 };

@@ -50,32 +50,18 @@
       "id": 7
     },
     {
-      "email": "rayhanmujumdar@gmail.com",
-      "password": "$2a$10$le2NL.OUwCILqBej0irFZeyauLkhphbctODXyruuPXWjc/IDMeTdO",
-      "name": "Rayhan M",
-      "role": "student",
+      "email": "",
+      "password": "$2a$10$qqegb3IMl3U.HW8UUXtfMONhbEItoQxzzTNIdmfVpOAqc/UrM6Z1W",
+      "name": "Rayhan",
+      "role": "admin",
       "id": 8
     },
     {
-      "email": "rayhanmujumdar0177@gmail.com",
-      "password": "$2a$10$V.QR27Ps8sXGg87Y0iFB2OAmhmguTv0R0CvqUaCiVeMtCmQRdT4fS",
-      "name": "Rayhan",
+      "email": "rayhan@gmail.com",
+      "password": "$2a$10$3dm/dJYu11nVXRdQNu9/gOyv2RoPob/6VMaBvc0/zSu/q6gONZNBq",
+      "name": "rayhan",
       "role": "admin",
       "id": 9
-    },
-    {
-      "email": "rayhan@gmail.com",
-      "password": "$2a$10$ug6e98HOnHMjueOaGmgDVOUu5i08cMJNqMrn8I929FwW4Heb6N9ne",
-      "name": "rayhan",
-      "role": "student",
-      "id": 10
-    },
-    {
-      "email": "rayhan12@gmail.com",
-      "password": "$2a$10$i5fv4aEAmJEzr7Pqm7bW1OBjXU4UPhMYb7OiS3COFslAp8HNzeORG",
-      "name": "Rayhan Mujumdar",
-      "role": "student",
-      "id": 12
     }
   ],
   "videos": [
@@ -96,54 +82,22 @@
       "views": "91.2K",
       "duration": "31:30",
       "createdAt": "2023-02-24T17:59:00.000Z"
-    },
-    {
-      "title": "K'NAAN - Wavin' Flag (Coca-Cola Celebration Mix)",
-      "url": "https://www.youtube.com/embed/WTJSt4wP2ME",
-      "description": "LatinAutor, CMRRA, UMPI, Kobalt Music Publishing, SOLAR Music Rights Management, LatinAutor - Warner Chappell, Sony Music Publishing, LatinAutor - SonyATV, Warner Chappell, LatinAutorPerf, PEDL, Abramus Digital, AMRA, BMI - Broadcast Music Inc., UMPG Publishing, BMG Rights Management (US), LLC, UNIAO BRASILEIRA DE EDITORAS DE MUSICA - UBEM, ARESA, LatinAutor - UMPG, LatinAutor - PeerMusic, Global Music Rights LLC, and 17 Music Rights Societies",
-      "duration": "3:30",
-      "views": "3.4k",
-      "createdAt": "2023-04-01T20:49:57.011Z",
-      "id": 3
-    },
-    {
-      "title": "roddy rich song",
-      "url": "https://www.youtube.com/embed/KPpouY3N6Vs",
-      "description": "val pakna roddy rich all time sodu gan gay\n",
-      "duration": "5.50",
-      "views": "3.1M",
-      "createdAt": "2023-04-03T17:44:48.888Z",
-      "id": 4
     }
   ],
   "assignments": [
     {
-      "title": "why everybody listen this song??why not",
-      "video_id": 3,
-      "video_title": "K'NAAN - Wavin' Flag (Coca-Cola Celebration Mix)",
-      "totalMark": 200,
-      "id": 1
-    },
-    {
-      "title": "Create a debounce function",
+      "id": 1,
+      "title": "Assignment 1 - Implement Debounce Function",
       "video_id": 1,
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "totalMark": 100,
-      "id": 2
+      "totalMark": 100
     },
     {
-      "title": "sdfsdf",
+      "id": 2,
+      "title": "Assignment 2 - Implement Best Practices",
       "video_id": 2,
       "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalMark": 33,
-      "id": 3
-    },
-    {
-      "title": "sdfds",
-      "video_id": 4,
-      "video_title": "roddy rich song",
-      "totalMark": 33,
-      "id": 4
+      "totalMark": 100
     }
   ],
   "quizzes": [
@@ -161,7 +115,7 @@
         {
           "id": "2",
           "option": "A function that is called after a certain time interval",
-          "isCorrect": true
+          "isCorrect": false
         },
         {
           "id": 3,
@@ -204,83 +158,35 @@
       ]
     },
     {
-      "question": "Hello my name jara",
-      "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "options": [
-        {
-          "id": 1,
-          "option": "what is she's name",
-          "isCorrect": true
-        },
-        {
-          "id": 2,
-          "option": "what is She",
-          "isCorrect": false
-        }
-      ],
-      "id": 3
-    },
-    {
-      "question": "Hello Rayhan",
+      "id": 3,
+      "question": "What is the difference between null and undefined in JavaScript?",
       "video_id": 2,
       "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "options": [
         {
           "id": 1,
-          "option": "sdfds",
+          "option": "null represents the intentional absence of any object value.",
           "isCorrect": true
         },
         {
           "id": 2,
-          "option": "sdrfsdfdsfds",
-          "isCorrect": false
-        }
-      ],
-      "id": 4
-    },
-    {
-      "question": "who is roddy rich",
-      "video_id": 4,
-      "video_title": "roddy rich song",
-      "options": [
-        {
-          "id": 1,
-          "option": "roddy is very good boy",
-          "isCorrect": false
-        },
-        {
-          "id": 2,
-          "option": "roddy is a bc",
+          "option": "undefined represents the uninitialized value of a variable or property.",
           "isCorrect": false
         },
         {
           "id": 3,
-          "option": "roddy is good boy",
+          "option": "Same thing",
           "isCorrect": false
         },
         {
           "id": 4,
-          "option": "roddy is singer",
-          "isCorrect": true
+          "option": "No Difference",
+          "isCorrect": false
         }
-      ],
-      "id": 5
+      ]
     }
   ],
   "assignmentMark": [
-    {
-      "id": 1,
-      "student_id": 2,
-      "student_name": "Saad Hasan",
-      "assignment_id": 1,
-      "title": "Assignment 1 - Implement Debounce Function",
-      "createdAt": "2021-01-15T15:17:01.727Z",
-      "totalMark": 100,
-      "mark": 100,
-      "repo_link": "https://github.com/Learn-with-Sumit/assignment-1",
-      "status": "published"
-    },
     {
       "id": 2,
       "student_id": 2,
@@ -294,7 +200,7 @@
       "status": "published"
     },
     {
-      "id": 3,
+      "id": 2,
       "student_id": 3,
       "student_name": "Akash Ahmed",
       "assignment_id": 1,
@@ -304,42 +210,6 @@
       "mark": 50,
       "repo_link": "https://github.com/Learn-with-Sumit/assignment-1",
       "status": "published"
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "assignment_id": 1,
-      "title": "why everybody listen this song??",
-      "createdAt": "2023-04-02T11:12:56.401Z",
-      "totalMark": 200,
-      "mark": 200,
-      "repo_link": "https://redux-toolkit.js.org/rtk-query/usage/automated-refetching",
-      "status": "published",
-      "id": 4
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "assignment_id": 2,
-      "title": "Create a debounce function",
-      "createdAt": "2023-04-03T19:58:18.874Z",
-      "totalMark": 100,
-      "mark": 100,
-      "repo_link": "https://stackabuse.com/insertion-sort-in-javascript/",
-      "status": "published",
-      "id": 5
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "assignment_id": 4,
-      "title": "sdfds",
-      "createdAt": "2023-04-03T20:00:01.741Z",
-      "totalMark": 33,
-      "mark": 33,
-      "repo_link": "https://stackabuse.com/insertion-sort-in-javascript/",
-      "status": "published",
-      "id": 6
     }
   ],
   "quizMark": [
@@ -354,42 +224,6 @@
       "totalWrong": 1,
       "totalMark": 10,
       "mark": 5
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "totalQuiz": 3,
-      "totalCorrect": 3,
-      "totalWrong": 0,
-      "totalMark": 15,
-      "mark": 15,
-      "id": 2
-    },
-    {
-      "student_id": 12,
-      "student_name": "Rayhan Mujumdar",
-      "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "totalQuiz": 3,
-      "totalCorrect": 3,
-      "totalWrong": 0,
-      "totalMark": 15,
-      "mark": 15,
-      "id": 3
-    },
-    {
-      "student_id": 8,
-      "student_name": "Rayhan M",
-      "video_id": 4,
-      "video_title": "roddy rich song",
-      "totalQuiz": 1,
-      "totalCorrect": 1,
-      "totalWrong": 0,
-      "totalMark": 5,
-      "mark": 5,
-      "id": 4
     }
   ]
 }

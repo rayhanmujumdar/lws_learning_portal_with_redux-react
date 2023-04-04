@@ -6,23 +6,32 @@ import { selectAuth } from "../../feature/auth/authSelector";
 import { useCheckRole } from "../../hooks/useCheckRole";
 import validateEmail from "../../utils/validEmail";
 import Error from "../ui/error/Error";
+import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
 
 export default function LoginForm() {
+  const location = useLocation()
   const isAdmin = useCheckRole("admin");
+  console.log(location.pathname === "/admin/login")
+  console.log(isAdmin)
+  const videoId = defaultPlayerRouteId();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, { isSuccess, isError, isLoading, error }] = useLoginMutation();
   const navigate = useNavigate();
   const [logInError, setLogInError] = useState(null);
   const { accessToken } = useSelector(selectAuth) || {};
-  const from = isAdmin ? "/admin/dashboard" : `/student/course-player/1`;
+  const from = isAdmin
+    ? "/admin/dashboard"
+    : videoId
+    ? `/student/course-player/${videoId}`
+    : `/student/course-player`;
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
-      login({
+      login({data: {
         email,
         password,
-      });
+      }});
     } else {
       setLogInError("Email is not valid");
     }
@@ -31,6 +40,7 @@ export default function LoginForm() {
     if (isSuccess || accessToken) {
       navigate(from, { replace: true });
     } else if (isError) {
+      console.log(error)
       setLogInError(error?.data);
     }
   }, [isSuccess, isError, accessToken]);

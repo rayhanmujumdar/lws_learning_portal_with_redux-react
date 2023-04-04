@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 export default function Video({ video }) {
   const { id, title, views, duration } = video;
   const { videoId } = useParams();
-  localStorage.setItem("videoId", JSON.stringify(videoId));
+  localStorage.setItem("videoId",videoId)
   return (
     <div
       className={`w-full flex flex-row gap-2 cursor-pointer hover:bg-slate-900 p-2 py-3 ${

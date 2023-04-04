@@ -37,7 +37,7 @@ function App() {
             element={<Register></Register>}
           ></Route>
           <Route
-            path="/student/course-player/:videoId"
+            path="/student/course-player"
             element={
               <LoggedRoute>
                 <StudentRoute>
@@ -46,7 +46,10 @@ function App() {
               </LoggedRoute>
             }
           >
-            <Route index element={<Description></Description>}></Route>
+            <Route
+              path="/student/course-player/:videoId"
+              element={<Description></Description>}
+            ></Route>
           </Route>
           <Route
             path="/student/quiz/:quizId"
