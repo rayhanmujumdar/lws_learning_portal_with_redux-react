@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../feature/auth/authApi";
 import { selectAuth } from "../../feature/auth/authSelector";
@@ -7,12 +7,13 @@ import { useCheckRole } from "../../hooks/useCheckRole";
 import validateEmail from "../../utils/validEmail";
 import Error from "../ui/error/Error";
 import defaultPlayerRouteId from "../../utils/defaultPlayerRouteId";
+import { usersSlice } from "../../feature/users/usersAPiSlice";
+import debounce from "../../utils/debounce";
 
-export default function LoginForm() {
-  const location = useLocation()
+export default function LoginForm({ roleName }) {
+  const location = useLocation();
+  const dispatch = useDispatch();
   const isAdmin = useCheckRole("admin");
-  console.log(location.pathname === "/admin/login")
-  console.log(isAdmin)
   const videoId = defaultPlayerRouteId();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,19 +29,43 @@ export default function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
-      login({data: {
-        email,
-        password,
-      }});
+      login({
+        data: {
+          email,
+          password,
+        },
+      });
     } else {
       setLogInError("Email is not valid");
     }
   };
+  const doSearch = async (e) => {
+    const email = e.target.value;
+    const { data: user } = await dispatch(
+      usersSlice.endpoints.getUser.initiate(email)
+    );
+    if (
+      location.pathname === "/admin/login" &&
+      user[0]?.role === roleName.toLowerCase()
+    ) {
+      setLogInError("");
+      setEmail(e.target.value);
+    } else if (
+      location.pathname === "/" &&
+      user[0]?.role === roleName.toLowerCase()
+    ) {
+      setLogInError("");
+      setEmail(e.target.value);
+    } else {
+      setLogInError(`This mail user is not ${roleName}`);
+    }
+  };
+  const handleUserRole = debounce(doSearch, 500);
   useEffect(() => {
     if (isSuccess || accessToken) {
       navigate(from, { replace: true });
     } else if (isError) {
-      console.log(error)
+      console.log(error);
       setLogInError(error?.data);
     }
   }, [isSuccess, isError, accessToken]);
@@ -53,8 +78,8 @@ export default function LoginForm() {
             Email address
           </label>
           <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            // value={email}
+            onChange={handleUserRole}
             id="email-address"
             name="email"
             type="email"

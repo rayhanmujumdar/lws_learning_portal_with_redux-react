@@ -4,6 +4,9 @@ import { addToLeaderboard, addMyRank } from "../leaderboard/leaderboardSlice";
 import { quizMarkApi } from "../quizMark/quizMarkAPi";
 export const usersSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getUser: builder.query({
+      query: (email) => `/users?email_like=${email}`
+    }),
     getUsers: builder.query({
       query: () => `/users`,
       providesTags: ["leaderboard"],

@@ -27,10 +27,10 @@ function App() {
       {!match && <Navbar></Navbar>}
       {authCheck && (
         <Routes>
-          <Route path="/" element={<Login>Student Account</Login>}></Route>
+          <Route path="/" element={<Login>Student</Login>}></Route>
           <Route
             path="/admin/login"
-            element={<Login>Admin Account</Login>}
+            element={<Login>Admin</Login>}
           ></Route>
           <Route
             path="/student/register"

@@ -62,6 +62,13 @@
       "name": "rayhan",
       "role": "admin",
       "id": 9
+    },
+    {
+      "email": "rayhanmujumdar0177@gmail.com",
+      "password": "$2a$10$n1FS0NIaX1WYj49BwdVbXOhXtQ7xnXI1hmkYgDGJSwb0KH.90QhAa",
+      "name": "Facebook Livegt",
+      "role": "student",
+      "id": 10
     }
   ],
   "videos": [
