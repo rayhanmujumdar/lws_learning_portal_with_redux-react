@@ -59,7 +59,6 @@ export default function LoginForm({ roleName }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
-      console.log({email,password})
       login({
         data: {
           email,

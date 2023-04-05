@@ -52,7 +52,7 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
           optimisticUpdateMark.undo();
         }
       },
-    })
+    }),
   }),
 });
 

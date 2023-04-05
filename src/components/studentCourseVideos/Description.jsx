@@ -31,6 +31,7 @@ export default function Description() {
   const videoSubmittedQuiz = userSubmittedQuiz?.find(
     (quiz) => quiz.video_id === Number(videoId)
   );
+
   const videoSubmittedAssignment = userSubmittedAssignment?.find(
     (submittedAssignment) => {
       if (assignment?.length > 0) {
