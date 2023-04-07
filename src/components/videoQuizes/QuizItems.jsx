@@ -46,7 +46,7 @@ export default function QuizItems() {
   }
   useEffect(() => {
     if (isSuccess) {
-      navigate(`/student/course-player/${quizzes[0].video_id}`);
+      navigate(`/student/leaderboard`);
     }
   }, [isSuccess]);
   // handle quiz submit
